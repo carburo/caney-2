@@ -1,0 +1,57 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {% trans %}title.pictures{% endtrans %}
+{% endblock %}
+
+{% block body %}
+    {{ include('photo-swipe.html.twig') }}
+
+    <section id="title" class="emerald">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1>{% trans %}title.pictures{% endtrans %}</h1>
+                    <p>{% trans %}subtitle.pictures{% endtrans %}</p>
+                </div>
+                <div class="col-sm-6">
+                    <ul class="breadcrumb pull-right">
+                        <li><a href="{{ path('homepage') }}">{% trans %}menu.homepage{% endtrans %}</a></li>
+                        <li class="active">{% trans %}menu.pictures{% endtrans %}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section><!--/#title-->
+
+    <section id="portfolio" class="container">
+        <ul class="portfolio-filter">
+            <li><a class="btn btn-default active" href="#" data-filter="*">{% trans %}all.pictures.short{% endtrans %}</a></li>
+            {% for tag in tags %}
+                <li><a class="btn btn-default" href="#" data-filter=".{{ tag.shortName }}">{{ tag.name }}</a></li>
+            {% endfor %}
+        </ul><!--/#portfolio-filter-->
+
+        <ul class="portfolio-items col-3 swipe-gallery">
+            {% for image in images %}
+                <li class="portfolio-item {{ image.tags|join(' ') }}">
+                    <div class="item-inner">
+                        <figure data-order="{{ loop.index - 1 }}" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                            <a href="{{ asset('images/gallery/full/' ~ image.filename) }}" itemprop="contentUrl" data-size="{{ image.pixelWidth }}x{{ image.pixelHeight }}">
+                                <img src="{{ asset('images/gallery/thumb/' ~ image.filename) }}" itemprop="thumbnail" alt="{{ image.description }}" />
+                            </a>
+                            <figcaption itemprop="caption description">{{ image.description }}</figcaption>
+                        </figure>
+                    </div>
+                </li><!--/.portfolio-item-->
+            {% endfor %}
+        </ul>
+    </section><!--/#portfolio-->
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('#portfolioMenu').addClass('active')
+    </script>
+{% endblock %}

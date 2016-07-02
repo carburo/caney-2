@@ -1,0 +1,184 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {% trans %}title.booking{% endtrans %}: {{ hostel }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/skins/flat/blue.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <section id="title" class="emerald">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1>{% trans %}title.booking{% endtrans %}</h1>
+                    <p>{% trans with {'%hostel%' : hostel} %}subtitle.booking{% endtrans %}</p>
+                </div>
+                <div class="col-sm-6">
+                    <ul class="breadcrumb pull-right">
+                        <li><a href="{{ path('homepage') }}">{% trans %}menu.homepage{% endtrans %}</a></li>
+                        <li class="active">{% trans %}menu.booking{% endtrans %}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section><!--/#title-->
+
+    <section id="booking-page" class="container">
+        <div class="row">
+            {% if not_access is defined %}
+            <div id="login-div" class="col-lg-6 col-md-12 col-sm-12">
+                <div id="success-message" class="status alert alert-info">
+                    You are not logged-in. You need to log-in in order to make a reservation.
+                </div>
+                <form method="post" action="{{ path('fos_user_security_login') }}">
+                    <input type="hidden" name="_target_path" value="booking" />
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-lg">{% trans %}Log-in{% endtrans %}</button>
+                    </div>
+                </form>
+                <form method="post" action="{{ path('fos_user_registration_register') }}">
+                    <input type="hidden" name="_target_path" value="booking" />
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg">{% trans %}Sign up{% endtrans %}</button>
+                    </div>
+                </form>
+            </div>
+            {% else %}
+            <div id="success-div" class="col-lg-6 col-md-12 col-sm-12" style="display: none">
+                <div id="success-message" class="status alert alert-success"></div>
+                <div class="form-group">
+                    <button id="success-btn" class="btn btn-success btn-lg">{% trans %}button.go.back{% endtrans %}</button>
+                </div>
+            </div>
+            {{ form_start(form, {'attr': {'class': 'booking-form' }}) }}
+            <div class="col-sm-6">
+                <div class="form-group">
+                    {{ form_widget(form.hostel, {'attr': {'class': 'hidden' }}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_widget(form.user, {'attr': {'class': 'hidden' }}) }}
+                </div>
+                <div class="form-group">
+                    <label id="nights">{% transchoice 0 with {'%nights%': 0} %}label.info.nights{% endtranschoice %}</label>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon icon-calendar"></i></span>
+                        <input type="text" id="date_range" required="required" maxlength="255" class="form-control" placeholder="{% trans %}label.booking.range{% endtrans %}" />
+                    </div>
+                </div>
+                <div class="hidden">
+                    {{ form_widget(form.startDate) }}
+                    {{ form_widget(form.endDate) }}
+                </div>
+                {#<div class="col-md-6 col-sm-12">#}
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="icon icon-male"></i></span>
+                            {{ form_widget(form.numberOfPersons, {'attr': {'placeholder': 'label.numberOfPersons' }}) }}
+                        </div>
+                    </div>
+                {#</div>#}
+                {#<div class="col-md-6 col-sm-12">#}
+                    {#<div class="form-group">#}
+                        {#<div class="input-group">#}
+                            {#<span class="input-group-addon"><i class="icon icon-child"></i></span>#}
+                            {#<input type="number" class="form-control" placeholder="Children"/>#}
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
+                <div class="form-group">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="icon icon-car"></i></span>
+                            {{ form_widget(form.arrivalMeans, {'attr': {'placeholder': 'label.arrivalMeans' }}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div id="booking_room" class="form-group check-list">
+                        {% for key, value in form.rooms %}
+                            {% set room = form.rooms.vars.choices[key].data %}
+                            {{
+                                form_widget(value, {
+                                    'label': "#{room.name}: #{room.typeOfRoom.name},
+                                    #{'label.room.capacity'|transchoice(room.capacity, { '%capacity%': room.capacity })}
+                                    ($#{room.precioBaja}/$#{room.precioAlta})"
+                                })
+                            }}
+                        {% endfor %}
+                    </div>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg">{% trans %}button.send{% endtrans %}</button>
+                </div>
+            </div><!--/.col-sm-8-->
+            <div class="col-sm-6">
+                {{ form_widget(form.comments, {'attr': {'placeholder': 'label.comments', 'rows': '16' }}) }}
+            </div><!--/.col-sm-4-->
+            {{ form_end(form) }}
+            {% endif %}
+        </div>
+    </section><!--/#contact-page-->
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(function() {
+//            $('input[name="booking[rooms][]"]:checked').each(function() {});
+            $('#bookingMenu').addClass('active');
+
+            $('#date_range').daterangepicker({
+                autoUpdateInput: false,
+                autoApply: true
+            }, function(start, end, label) {
+                $('#booking_startDate').val(start.format('YYYY-MM-DD'));
+                $('#booking_endDate').val(end.format('YYYY-MM-DD'));
+                var nights = end.diff(start, 'days');
+                var locale = "{{  app.request.attributes.get('_locale') }}";
+                var text;
+                if(locale == "en") {
+                    switch (nights) {
+                        case 0: text = "Choose a date range for the reservation."; break;
+                        case 1: text = "Reservation for one night."; break;
+                        default : text = "Reservation for " + nights + " nights.";
+                    }
+                } else if (locale == "es") {
+                    switch (nights) {
+                        case 0: text = "Elija un rango de fechas para la reserva."; break;
+                        case 1: text = "Reserva por una noche."; break;
+                        default : text = "Reserva por " + nights + " noches.";
+                    }
+                } else if (locale == "fr") {
+                    switch (nights) {
+                        case 0: text = "Elija un rango de fechas para la reserva."; break;
+                        case 1: text = "Reserva por una noche."; break;
+                        default : text = "Reserva por " + nights + " noches.";
+                    }
+                }
+                $('#nights').text(text);
+            });
+
+            $('#date_range').on('apply.daterangepicker', function(ev, picker) {
+                $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+            });
+        });
+    </script>
+
+    <script src="{{ asset('js/icheck.min.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_flat-blue',
+                radioClass: 'iradio_flat-blue',
+                increaseArea: '20%' // optional
+            });
+        });
+    </script>
+{% endblock %}

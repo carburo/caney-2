@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {% trans %}title.hostels{% endtrans %}: {# {{ destination.name }} #}
+{% endblock %}
+
+{% block body %}
+    <section id="portfolio" class="container">
+        <ul class="portfolio-items col-3">
+            {% for hostel in hostels %}
+                <li class="portfolio-item joomla bootstrap">
+                    <div class="item-inner">
+                        {% set image = hostel.images|first %}
+                        <a href="{{ path('hostel_view', {'slug' : hostel.slug}) }}">
+                            <img src="{{ vich_uploader_asset(image, 'imageFile')|imagine_filter('app_thumb') }}" alt="{{ hostel.hostelName }}">
+                            <h5>{{ hostel.hostelName }}</h5>
+                        </a>
+                    </div>
+                </li><!--/.portfolio-item-->
+            {% endfor %}
+        </ul>
+    </section><!--/#portfolio-->
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {#<script type="text/javascript">#}
+        {#$('#portfolioMenu').addClass('active')#}
+    {#</script>#}
+{% endblock %}

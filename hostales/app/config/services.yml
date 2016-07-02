@@ -1,0 +1,16 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+  andorina.twig.country_extension:
+    class: AppBundle\Twig\CountryExtension
+    tags:
+      - { name: twig.extension }
+  andorina.twig.locale_extension:
+    class: AppBundle\Twig\LocaleExtension
+    tags:
+      - { name: twig.extension }
+  app.directory_namer.hostel:
+    class: AppBundle\Uploads\HostelDirectoryNamer

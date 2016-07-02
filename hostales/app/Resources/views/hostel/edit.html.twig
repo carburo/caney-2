@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {% trans %}title.contact{% endtrans %}
+{% endblock %}
+
+{% block body %}
+    <section id="title" class="emerald" xmlns="http://www.w3.org/1999/html">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1>{% trans %}title.contact{% endtrans %}</h1>
+                    <p>{% trans %}subtitle.contact{% endtrans %}</p>
+                </div>
+                <div class="col-sm-6">
+                    <ul class="breadcrumb pull-right">
+                        <li><a href="{{ path('homepage') }}">{% trans %}menu.homepage{% endtrans %}</a></li>
+                        <li class="active">{% trans %}menu.contact{% endtrans %}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section><!--/#title-->
+
+    <section id="hostel-registration-page" class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg">{% trans %}button.send{% endtrans %}</button>
+                    </div>
+                {{ form_end(form) }}
+            </div><!--/.col-sm-8-->
+        </div>
+    </section><!--/#contact-page-->
+{% endblock %}

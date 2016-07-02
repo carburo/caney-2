@@ -1,0 +1,24 @@
+<section id="hostels" class="alizarin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="center">
+                    <h2 class="latoTitle">{% trans %}title.other.locations{% endtrans %}</h2>
+                </div>
+                <div class="gap"></div>
+                {% for city in cities %}
+                    {% if (loop.index - 1) is divisible by(4) %}<div class="row">{% endif %}
+
+                    <div class="col-md-3 col-sm-6">
+                        <h2 class="montez"><a href="{{ path('hostels', {'slug' : city.slug}) }}">{{ city.name }}</a></h2>
+                    </div>
+
+                    {% if loop.index is divisible by(4) %}</div>{% endif %}
+                {% endfor %}
+                {#      Trinidad     |      Viñales     |     La Habana    |     Matanzas     #}
+                {#  Sancti Spíritus  |     Cienfuegos   |    Santa Clara   |      Morón       #}
+                {#     Remedios      | Santiago de Cuba |     Baracoa                         #}
+            </div>
+        </div>
+    </div>
+</section><!--/#services-->

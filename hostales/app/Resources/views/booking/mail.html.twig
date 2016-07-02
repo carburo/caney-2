@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <h1>Solicitud de reserva</h1>
+    Nombre: {{ booking.user.fullName }} <br>
+    País: {{ booking.user.country|country('es') }} <br>
+    Email: {{ booking.user.email }} <br>
+    Rango: {{ booking.startDate|date("d/m/Y") }} - {{ booking.endDate|date("d/m/Y") }} <br>
+    Número de personas: {{ booking.numberOfPersons }} <br>
+    Arrivo por: {{ booking.arrivalMeans }} <br>
+    {% if booking.rooms is not empty %}
+    Habitaciones:
+    <ul>
+        {% for room in booking.rooms %}
+            <li>{{ room.name }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    Comentarios: {{ booking.comments }}
+
+</body>
+</html>
