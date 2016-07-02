@@ -4,8 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Contact;
 use AppBundle\Form\ContactType;
-use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
-use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue as RecaptchaTrue;
+// use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
+// use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue as RecaptchaTrue;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class ContactController
  * @package AppBundle\Controller
+ * @Route("/{_locale}", requirements={"_locale" = "%app.locales%"})
  */
 class ContactController extends Controller
 {
@@ -24,14 +25,14 @@ class ContactController extends Controller
     {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
-        if(!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            $form->add('recaptcha', EWZRecaptchaType::class, array(
-                'mapped' => false,
-                'constraints' => array(
-                    new RecaptchaTrue()
-                )
-            ));
-        }
+//         if(!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+//             $form->add('recaptcha', EWZRecaptchaType::class, array(
+//                 'mapped' => false,
+//                 'constraints' => array(
+//                     new RecaptchaTrue()
+//                 )
+//             ));
+//         }
 
         $form->handleRequest($request);
 

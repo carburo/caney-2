@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class PicturesController
  * @package AppBundle\Controller
+ * @Route("/{_locale}", requirements={"_locale" = "%app.locales%"})
  */
 class PicturesController extends Controller
 {

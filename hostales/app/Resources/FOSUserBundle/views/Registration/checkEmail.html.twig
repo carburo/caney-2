@@ -1,0 +1,15 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <section id="confirmation-page" class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div id="success-message" class="status alert alert-info">
+                    {{ 'registration.check_email'|trans({'%email%': user.email}) }}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock fos_user_content %}

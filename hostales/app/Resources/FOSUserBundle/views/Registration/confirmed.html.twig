@@ -1,0 +1,25 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+<section id="confirmation-page" class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <div id="success-message" class="status alert alert-success">
+                {{ 'registration.confirmed'|trans({'%username%': user.username}) }}
+            </div>
+        </div>
+    </div>
+
+    {% if targetUrl %}
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <div>
+                <p><a href="{{ path(targetUrl) }}">{{ 'registration.back'|trans }}</a></p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</section>
+{% endblock fos_user_content %}

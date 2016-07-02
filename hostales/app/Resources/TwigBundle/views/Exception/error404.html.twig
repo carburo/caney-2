@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+
+{% block title %}404{% endblock %}
+
+{% block body %}
+    <section id="error" class="container">
+        <h1>{% trans %}404.title{% endtrans %}</h1>
+        <p>{% trans %}404.text{% endtrans %}</p>
+        <a class="btn btn-success" href="{{ path('homepage') }}">{{ '404.text.button'|trans|upper }}</a>
+    </section>
+{% endblock %}

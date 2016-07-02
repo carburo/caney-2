@@ -1,0 +1,60 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<section id="registration" class="container">
+
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'center', 'role': 'form'}}) }}
+    <fieldset class="registration-form">
+        <div class="form-group">
+            {{ form_errors(form.fullName) }}
+                {{ form_widget(form.fullName, {'attr': {'placeholder': form.fullName.vars.label}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_errors(form.email) }}
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon icon-envelope-o"></i></span>
+                {{ form_widget(form.email, {'attr': {'placeholder': form.email.vars.label}}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_errors(form.username) }}
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon icon-user"></i></span>
+                {{ form_widget(form.username, {'attr': {'placeholder': form.username.vars.label}}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_errors(form.phoneNumber) }}
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon icon-phone"></i></span>
+                {{ form_widget(form.phoneNumber, {'attr': {'placeholder': form.phoneNumber.vars.label}}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_errors(form.country) }}
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon icon-globe"></i></span>
+                {{ form_widget(form.country, {'placeholder': form.country.vars.label}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_errors(form.plainPassword.first) }}
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon icon-key"></i></span>
+                {{ form_widget(form.plainPassword.first, {'attr': {'placeholder': form.plainPassword.first.vars.label}}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_errors(form.plainPassword.second) }}
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon icon-repeat"></i></span>
+                {{ form_widget(form.plainPassword.second, {'attr': {'placeholder': form.plainPassword.second.vars.label}}) }}
+            </div>
+        </div>
+        {{ form_widget(form) }}
+        <div class="form-group">
+            <input type="submit" id="_submit" name="_submit" class="btn btn-success btn-md btn-block" value="{{ 'registration.submit'|trans }}" />
+        </div>
+    </fieldset>
+{{ form_end(form) }}
+
+</section>

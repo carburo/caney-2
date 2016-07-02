@@ -12,5 +12,21 @@ services:
     class: AppBundle\Twig\LocaleExtension
     tags:
       - { name: twig.extension }
+  app.post_voter:
+    class: AppBundle\Security\HostelVoter
+    arguments: ['@security.access.decision_manager']
+    public: false
+    tags:
+      - { name: security.voter }
+  app.booking_voter:
+    class: AppBundle\Security\BookingVoter
+    arguments: ['@security.access.decision_manager']
+    public: false
+    tags:
+      - { name: security.voter }
   app.directory_namer.hostel:
     class: AppBundle\Uploads\HostelDirectoryNamer
+  app.form.registration:
+    class: AppBundle\Form\RegistrationType
+    tags:
+      - { name: form.type, alias: app_user_registration }

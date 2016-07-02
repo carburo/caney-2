@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class BookingController
  * @package AppBundle\Controller
+ * @Route("/{_locale}", requirements={"_locale" = "%app.locales%"})
  */
 class BookingController extends Controller
 {
