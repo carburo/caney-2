@@ -37,12 +37,12 @@ class HomeController extends Controller
      */
     public function homeAction(Request $request)
     {
-        $repo = $this->getDoctrine()->getRepository('AppBundle:City');
-        $cities = $repo->getBySortableGroups();
+        $repo = $this->getDoctrine()->getRepository('AppBundle:Location');
+        $locations = $repo->getBySortableGroups();
         $repo = $this->getDoctrine()->getRepository('AppBundle:Image');
         $recentPictures = $repo->findByFrontPage(true);
         return $this->render('home/index.html.twig', array(
-            'cities' => $cities,
+            'locations' => $locations,
             'recentPictures' => $recentPictures,
         ));
     }

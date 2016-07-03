@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\City;
+use AppBundle\Entity\Location;
 use AppBundle\Entity\Hostel;
 use AppBundle\Form\HostelType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -19,7 +19,7 @@ class HostelsController extends Controller
     /**
      * @Route("/hostels/{slug}", name="hostelsByDestination")
      */
-    public function galleryByDestinationAction(Request $request, City $destination) {
+    public function galleryByDestinationAction(Request $request, Location $destination) {
         return $this->render('hostel/gallery.html.twig', array(
             'hostels' => $destination->getHostels(),
         ));

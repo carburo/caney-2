@@ -61,7 +61,7 @@ class Hostel
     /**
      * @var string
      *
-     * @ORM\Column(name="website", type="string", length=255)
+     * @ORM\Column(name="website", type="string", length=255, nullable=true)
      */
     private $website;
 
@@ -99,20 +99,13 @@ class Hostel
      * @ORM\Column(name="dinner_price", type="decimal", precision=10, scale=2, nullable=true)
      */
     private $dinnerPrice;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="internet", type="boolean")
-     */
-    private $internet;
     
     /**
      * @var bool
      *
-     * @ORM\Column(name="coctails", type="boolean")
+     * @ORM\Column(name="cocktails", type="boolean")
      */
-    private $coctails;
+    private $cocktails;
     
     /**
      * @var bool
@@ -152,6 +145,13 @@ class Hostel
     /**
      * @var bool
      *
+     * @ORM\Column(name="internet", type="boolean")
+     */
+    private $internet;
+
+    /**
+     * @var bool
+     *
      * @ORM\Column(name="wifi", type="boolean")
      */
     private $wifi;
@@ -177,11 +177,11 @@ class Hostel
     private $otherServices;
 
     /**
-     * @var City
-     * @ORM\ManyToOne(targetEntity="City", inversedBy="hostels")
-     * @ORM\JoinColumn(name="city_id", referencedColumnName="id")
+     * @var Location
+     * @ORM\ManyToOne(targetEntity="Location", inversedBy="hostels")
+     * @ORM\JoinColumn(name="location_id", referencedColumnName="id")
      */
-    private $city;
+    private $location;
 
 
     /**
@@ -419,19 +419,19 @@ class Hostel
     }
 
     /**
-     * @return City
+     * @return Location
      */
-    public function getCity()
+    public function getLocation()
     {
-        return $this->city;
+        return $this->location;
     }
 
     /**
-     * @param City $city
+     * @param Location $location
      */
-    public function setCity($city)
+    public function setLocation($location)
     {
-        $this->city = $city;
+        $this->location = $location;
     }
 
     /**
@@ -517,17 +517,17 @@ class Hostel
     /**
      * @return boolean
      */
-    public function isCoctails()
+    public function isCocktails()
     {
-        return $this->coctails;
+        return $this->cocktails;
     }
 
     /**
-     * @param boolean $coctails
+     * @param boolean $cocktails
      */
-    public function setCoctails($coctails)
+    public function setCocktails($cocktails)
     {
-        $this->coctails = $coctails;
+        $this->cocktails = $cocktails;
     }
 
     /**

@@ -17,9 +17,25 @@ class RoomType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
+            ->add('capacity')
+            ->add('priceInHigh', MoneyType::class, [
+                'currency' => 'CUC'
+            ])
+            ->add('priceInLow', MoneyType::class, [
+                'currency' => 'CUC'
+            ])
+            ->add('privateBathroom')
+            ->add('hotWater')
+            ->add('airConditioner')
+            ->add('voltage120')
+            ->add('voltage240')
+            ->add('privateEntrance')
+            ->add('safe')
+            ->add('terrace')
+            ->add('minibar')
+            ->add('hairDryer')
+            ->add('television')
             ->add('typeOfRoom')
-            ->add('precioAlta')
-            ->add('precioBaja')
             ->add('hostel')
         ;
     }

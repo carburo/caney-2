@@ -7,13 +7,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * City
+ * Location
  *
- * @ORM\Table(name="city")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\CityRepository")
- * @Gedmo\TranslationEntity(class="AppBundle\Entity\CityTranslation")
+ * @ORM\Table(name="location")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\LocationRepository")
+ * @Gedmo\TranslationEntity(class="AppBundle\Entity\LocationTranslation")
  */
-class City
+class Location
 {
     /**
      * @var int
@@ -41,7 +41,14 @@ class City
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Hostel", mappedBy="city")
+     * @var Province
+     * @ORM\ManyToOne(targetEntity="Province", inversedBy="locations")
+     * @ORM\JoinColumn(name="province_id", referencedColumnName="id")
+     */
+    private $province;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Hostel", mappedBy="location")
      */
     private $hostels;
 
@@ -53,7 +60,7 @@ class City
 
     /**
      * @ORM\OneToMany(
-     *   targetEntity="CityTranslation",
+     *   targetEntity="LocationTranslation",
      *   mappedBy="object",
      *   cascade={"persist", "remove"}
      * )
@@ -90,7 +97,7 @@ class City
      *
      * @param string $slug
      *
-     * @return City
+     * @return Location
      */
     public function setSlug($slug)
     {
@@ -112,7 +119,7 @@ class City
      *
      * @param string $name
      *
-     * @return City
+     * @return Location
      */
     public function setName($name)
     {
@@ -161,6 +168,22 @@ class City
     public function setPosition($position)
     {
         $this->position = $position;
+    }
+
+    /**
+     * @return Province
+     */
+    public function getProvince()
+    {
+        return $this->province;
+    }
+
+    /**
+     * @param Province $province
+     */
+    public function setProvince($province)
+    {
+        $this->province = $province;
     }
 
     public function __toString() {
