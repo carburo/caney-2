@@ -38,29 +38,36 @@
                             {% transchoice room.capacity with {'%capacity%': room.capacity} %}label.room.capacity{% endtranschoice %}
                             {% if room.description is not empty %}, {{ room.description }}{% endif %}
                             (
-                                <abbr title="{{ 'label.lowSeason'|trans }}"><i class="icon icon-arrow-down"></i></abbr> ${{ room.precioBaja }}
+                                <abbr title="{{ 'label.lowSeason'|trans }}"><i class="icon icon-arrow-down"></i></abbr> ${{ room.priceInLow }}
                             /
-                            <abbr title="{{ 'label.highSeason'|trans }}"><i class="icon icon-arrow-up"></i></abbr> ${{ room.precioAlta }}
+                            <abbr title="{{ 'label.highSeason'|trans }}"><i class="icon icon-arrow-up"></i></abbr> ${{ room.priceInHigh }}
                             )
-                            {#(${{ room.price }})#}
                         </li>
                     {% endfor %}
                 </ul>
                 <h3>{% trans %}title.home.descriptions{% endtrans %}</h3>
                 <ul>
-                    {% if(hostel.privateBathroom) %}<li>{% trans %}label.private.bathroom{% endtrans %}</li>{% endif %}
-                    {% if(hostel.airConditioner) %}<li>{% trans %}label.air.conditioner{% endtrans %}</li>{% endif %}
-                    {% if(hostel.hairDryer) %}<li>{% trans %}label.hair.dryer{% endtrans %}</li>{% endif %}
-                    {% if(hostel.towelsInTheRoom) %}<li>{% trans %}label.towels.in.room{% endtrans %}</li>{% endif %}
-                    {% if(hostel.cleanSheets > 0) %}<li>{% transchoice hostel.cleanSheets with {'%frequency%': hostel.cleanSheets } %}label.clean.sheets{% endtranschoice %}</li>{% endif %}
-                    {% if(hostel.bathroomItems) %}<li>{% trans %}label.bathroom.items{% endtrans %}</li>{% endif %}
+                    <li>{% trans with { '%option%': hostel.childrenAccepted } %}label.children.accepted{% endtrans %}</li>
+                    <li>{% trans with { '%option%': hostel.garage } %}label.garage{% endtrans %}</li>
+                    <li>{% trans with { '%option%': hostel.laundry } %}label.laundry{% endtrans %}</li>
+                    <li>{% trans with { '%option%': hostel.swimmingPool } %}label.swimmingPool{% endtrans %}</li>
+                    <li>{% trans with { '%option%': hostel.internet } %}label.internet{% endtrans %}</li>
+                    <li>{% trans with { '%option%': hostel.wifi } %}label.wifi{% endtrans %}</li>
                 </ul>
                 <h3>{% trans %}title.food.prices{% endtrans %}</h3>
                 <ul>
-                    <li>{% trans with {'%price%': hostel.breakfastPrice } %}label.breakfast.price{% endtrans %}</li>
-                    <li>{% trans with {'%price%': hostel.dinnerPrice } %}label.dinner.price{% endtrans %} *</li>
+                    {% if hostel.breakfast %}
+                        <li>{% trans with {'%price%': hostel.breakfastPrice } %}label.breakfast.price{% endtrans %}</li>
+                    {% else %}
+                        <li>{{ 'label.breakfast'|trans }}: <strong>{{ 'label.not.available'|trans }}</strong></li>
+                    {% endif %}
+                    {% if hostel.dinner %}
+                        <li>{% trans with {'%price%': hostel.dinnerPrice } %}label.dinner.price{% endtrans %}</li>
+                    {% else %}
+                        <li>{{ 'label.dinner'|trans }}: <strong>{{ 'label.not.available'|trans }}</strong></li>
+                    {% endif %}
+                    {% if hostel.coctails %}<li>{{ 'label.coctails'|trans }}</li>{% endif %}
                 </ul>
-                <p>* {% trans %}dinner.note{% endtrans %}</p>
                 {% if hostel.otherServices is not empty %}
                     <h3>{% trans %}title.other.services{% endtrans %}</h3>
                     <ul>
