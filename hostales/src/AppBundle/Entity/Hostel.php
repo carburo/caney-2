@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -167,6 +168,13 @@ class Hostel
     private $images;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="active", type="boolean")
+     */
+    private $active;
+
+    /**
      *
      * @ORM\ManyToMany(targetEntity="OtherServices")
      * @ORM\JoinTable(name="services_by_hostel",
@@ -182,6 +190,12 @@ class Hostel
      * @ORM\JoinColumn(name="location_id", referencedColumnName="id")
      */
     private $location;
+
+    function __construct()
+    {
+        $this->rooms = new ArrayCollection();
+        $this->images = new ArrayCollection();
+    }
 
 
     /**
@@ -387,7 +401,7 @@ class Hostel
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getRooms()
     {
@@ -608,6 +622,22 @@ class Hostel
     public function setLaundry($laundry)
     {
         $this->laundry = $laundry;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param boolean $active
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
     }
     
     public function __toString() {

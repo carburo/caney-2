@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Location;
 use AppBundle\Entity\Hostel;
+use AppBundle\Entity\Room;
 use AppBundle\Form\HostelType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -43,6 +44,7 @@ class HostelsController extends Controller
     public function registerAction(Request $request)
     {
         $hostel = new Hostel();
+
         $this->denyAccessUnlessGranted('create', $hostel);
         $form = $this->createForm(HostelType::class, $hostel);
 

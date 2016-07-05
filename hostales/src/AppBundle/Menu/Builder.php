@@ -13,8 +13,13 @@ class Builder implements ContainerAwareInterface
     {
         $menu = $factory->createItem('root');
 
-        $menu->addChild('Home', ['route' => 'homepage']);
         $menu->setChildrenAttribute('class', 'nav navbar-nav');
+
+        $menu->addChild('menu.homepage', ['route' => 'homepage']);
+        $menu->addChild('menu.hostels', ['route' => 'hostels']);
+        $menu->addChild('menu.contact', ['route' => 'contact']);
+
+        $menu->addChild('Register', ['route' => 'hostel_registration']);
 
 //         // access services from the container!
 //         $em = $this->container->get('doctrine')->getManager();
@@ -27,17 +32,17 @@ class Builder implements ContainerAwareInterface
 //         ));
 
         // create another menu item
-        $menu->addChild('About Me', ['route' => 'contact']);
-        // you can also add sub level's to your menu's as follows
-        $menu['About Me']->setChildrenAttribute('class', 'dropdown-menu');
-        // data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
-        $menu['About Me']->setLinkAttribute('class', 'dropdown-toggle');
-        $menu['About Me']->setLinkAttribute('data-toggle', 'dropdown');
-        $menu['About Me']->setLinkAttribute('role', 'button');
-        $menu['About Me']->setLinkAttribute('aria-haspopup', 'true');
-        $menu['About Me']->setLinkAttribute('aria-expanded', 'false');
-        
-        $menu['About Me']->addChild('Edit profile', ['route' => 'hostels']);
+//        $menu->addChild('About Me', ['route' => 'contact']);
+//        // you can also add sub level's to your menu's as follows
+//        $menu['About Me']->setChildrenAttribute('class', 'dropdown-menu');
+//        // data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+//        $menu['About Me']->setLinkAttribute('class', 'dropdown-toggle');
+//        $menu['About Me']->setLinkAttribute('data-toggle', 'dropdown');
+//        $menu['About Me']->setLinkAttribute('role', 'button');
+//        $menu['About Me']->setLinkAttribute('aria-haspopup', 'true');
+//        $menu['About Me']->setLinkAttribute('aria-expanded', 'false');
+//
+//        $menu['About Me']->addChild('Edit profile', ['route' => 'hostels']);
 
         // ... add more children
 

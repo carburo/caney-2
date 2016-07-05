@@ -208,7 +208,7 @@ class HostelImage
     }
 
     public function __toString() {
-        return "{$this->hostel->getHostelName()}/{$this->filename})";
+        return "{$this->hostel->getHostelName()}/{$this->filename}";
     }
 }
 

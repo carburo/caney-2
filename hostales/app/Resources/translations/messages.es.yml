@@ -1,0 +1,10 @@
+form:
+  fullName: Nombre completo
+  country: País
+  phoneNumber: Teléfono
+  email: Correo electrónico
+  message: Mensaje
+menu:
+  homepage: Inicio
+  hostels: Hostales
+  contact: Contacto
