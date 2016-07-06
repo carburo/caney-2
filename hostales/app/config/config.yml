@@ -97,7 +97,7 @@ vich_uploader:
     hostel_images:
       uri_prefix:         %app.path.hostel_images%
       upload_destination: %kernel.root_dir%/../web/%app.path.hostel_images%
-      directory_namer: app.directory_namer.hostel
+      directory_namer:    app.directory_namer.hostel
 
 liip_imagine:
   resolvers:
@@ -126,9 +126,9 @@ liip_imagine:
           position: bottomright
         strip: ~
 
-#sonata_block:
-#  default_contexts: [cms]
-#  blocks:
-#    # enable the SonataAdminBundle block
-#    sonata.admin.block.admin_list:
-#      contexts: [admin]
+sonata_block:
+  default_contexts: [cms]
+  blocks:
+    # enable the SonataAdminBundle block
+    sonata.admin.block.admin_list:
+      contexts: [admin]

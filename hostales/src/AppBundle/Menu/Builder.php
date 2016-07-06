@@ -12,40 +12,86 @@ class Builder implements ContainerAwareInterface
     public function mainMenu(FactoryInterface $factory, array $options)
     {
         $menu = $factory->createItem('root');
-
         $menu->setChildrenAttribute('class', 'nav navbar-nav');
-
-        $menu->addChild('menu.homepage', ['route' => 'homepage']);
-        $menu->addChild('menu.hostels', ['route' => 'hostels']);
-        $menu->addChild('menu.contact', ['route' => 'contact']);
-
-        $menu->addChild('Register', ['route' => 'hostel_registration']);
-
-//         // access services from the container!
-//         $em = $this->container->get('doctrine')->getManager();
-//         // findMostRecent and Blog are just imaginary examples
-//         $blog = $em->getRepository('AppBundle:Blog')->findMostRecent();
-
-//         $menu->addChild('Latest Blog Post', array(
-//             'route' => 'blog_show',
-//             'routeParameters' => array('id' => $blog->getId())
-//         ));
-
-        // create another menu item
-//        $menu->addChild('About Me', ['route' => 'contact']);
-//        // you can also add sub level's to your menu's as follows
-//        $menu['About Me']->setChildrenAttribute('class', 'dropdown-menu');
-//        // data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
-//        $menu['About Me']->setLinkAttribute('class', 'dropdown-toggle');
-//        $menu['About Me']->setLinkAttribute('data-toggle', 'dropdown');
-//        $menu['About Me']->setLinkAttribute('role', 'button');
-//        $menu['About Me']->setLinkAttribute('aria-haspopup', 'true');
-//        $menu['About Me']->setLinkAttribute('aria-expanded', 'false');
-//
-//        $menu['About Me']->addChild('Edit profile', ['route' => 'hostels']);
-
-        // ... add more children
-
+        
+        $menu->addChild('menu.homepage', [
+            'route' => 'homepage'
+        ]);
+        
+        $menu->addChild('menu.hostels', [
+            'route' => 'hostels'
+        ]);
+        
+        $menu->addChild('menu.contact', [
+            'route' => 'contact'
+        ]);
+        
+        $menu->addChild('Register', [
+            'route' => 'hostel_registration'
+        ]);
+        
+        // access services from the container!
+        // $em = $this->container->get('doctrine')->getManager();
+        
         return $menu;
     }
+    
+    public function userMenu(FactoryInterface $factory, array $options)
+    {
+        $menu = $factory->createItem('root');
+        $menu->setChildrenAttribute('class', 'nav navbar-nav navbar-right');
+    
+        $securityChecker = $this->container->get('security.authorization_checker');
+        $translator = $this->container->get('translator');
+        if ($securityChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            $securityContext = $this->container->get('security.token_storage');
+            $username = $securityContext->getToken()
+            ->getUser()
+            ->getUsername();
+        
+            $userMessage = $translator->trans('menu.welcome.message', [
+                '%visitor%' => $username
+            ]);
+        
+            // create another menu item
+            $menu->addChild('User', [
+                'label' => $userMessage
+            ])->setAttribute('dropdown', true);
+        
+            $menu['User']->addChild($translator->trans('menu.user.edit'), [
+                'route' => 'fos_user_profile_edit'
+            ])->setAttribute('icon', 'icon icon-edit');
+        
+            $menu['User']->addChild($translator->trans('layout.logout', [], 'FOSUserBundle'), [
+                'route' => 'fos_user_security_logout'
+            ])->setAttribute('icon', 'icon icon-sign-out');
+        } else {
+            $menu->addChild($translator->trans('layout.login', [], 'FOSUserBundle'), [
+                'route' => 'fos_user_security_login'
+            ])->setAttribute('icon', 'icon icon-sign-in');
+        }
+    
+        return $menu;
+    }
+    
+    
+//     public function languageMenu(FactoryInterface $factory, array $options)
+//     {
+//         $menu = $this->createMenu($factory);
+    
+//         $locales = explode('|', $this->container->getParameter('app.locales'));
+        
+//         $menu->addChild('Language', [
+//             'label' => 'Language'
+//         ])->setAttribute('dropdown', true);
+        
+//         foreach ($locales as $locale) {
+//             $menu['Language']->addChild($locale, [
+//                 'route' => 'fos_user_security_login'
+//             ]);
+//         }
+    
+//         return $menu;
+//     }
+
 }

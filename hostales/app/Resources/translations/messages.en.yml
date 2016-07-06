@@ -1,0 +1,15 @@
+form:
+  fullName: Full name
+  country: Country
+  phoneNumber: Phone number
+  email: Email
+  message: Message
+menu:
+  homepage: Homepage
+  hostels: Hostels
+  booking: Reservation
+  contact: Contact
+  welcome:
+    message: Hi %visitor%
+  user:
+    edit: Edit Profile

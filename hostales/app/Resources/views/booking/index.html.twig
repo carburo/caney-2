@@ -20,6 +20,9 @@
                 <div class="col-sm-6">
                     <ul class="breadcrumb pull-right">
                         <li><a href="{{ path('homepage') }}">{% trans %}menu.homepage{% endtrans %}</a></li>
+                        <li><a href="{{ path('hostels') }}">{% trans %}menu.hostels{% endtrans %}</a></li>
+                        <li><a href="{{ path('hostelsByDestination', {'slug' : hostel.location.slug }) }}">{{ hostel.location.name }}</a></li>
+                        <li><a href="{{ path('hostel_view', {'slug': hostel.slug}) }}">{{ hostel }}</a></li>
                         <li class="active">{% trans %}menu.booking{% endtrans %}</li>
                     </ul>
                 </div>
@@ -107,7 +110,7 @@
                                 form_widget(value, {
                                     'label': "#{room.name}: #{room.typeOfRoom.name},
                                     #{'label.room.capacity'|transchoice(room.capacity, { '%capacity%': room.capacity })}
-                                    ($#{room.precioBaja}/$#{room.precioAlta})"
+                                    ($#{room.priceInLow}/$#{room.priceInHigh})"
                                 })
                             }}
                         {% endfor %}

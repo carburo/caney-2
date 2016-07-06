@@ -7,4 +7,9 @@ form:
 menu:
   homepage: Inicio
   hostels: Hostales
+  booking: Reserva
   contact: Contacto
+  welcome:
+    message: Hola %visitor%
+  user:
+    edit: Editar perfil
