@@ -48,30 +48,10 @@
           		'currentClass': 'active', 
           		'template': 'menu/bootstrap3_menu.html.twig' 
             }) }}
-            <ul class="nav navbar-nav navbar-right">
-              	<li class="first last dropdown">                
-              		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-{#         	    		<strong>#}
-{#                             {{  app.request.locale|locale|capitalize }}#}
-{#                         </strong> <b class="caret"></b>#}
-						<img alt="{{ app.request.locale|locale|capitalize }}" src="{{ asset("media/ico/#{app.request.locale}.png") }}">
-        			</a>
-        			{% if app.request.attributes.get('_route') is not null %}
-                    <ul class="menu_level_1 dropdown-menu">
-                        {% for _locale in _locales|split('|') %}
-                            {% if app.request.locale != _locale  %}
-                                <li>
-                                    <a title="{{ _locale|locale|capitalize }}" href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': _locale })) }}">
-                                        <img alt="{{ _locale|locale(_locale)|capitalize }}" src="{{ asset("media/ico/#{_locale}.png") }}">
-                                        {{ _locale|locale(_locale)|capitalize }}
-                                    </a>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-        		</li>
-    		</ul>
+            {{ knp_menu_render('AppBundle:Builder:languageMenu', { 
+          		'currentClass': 'active', 
+          		'template': 'menu/bootstrap3_menu.html.twig' 
+            }) }}
             {{ knp_menu_render('AppBundle:Builder:userMenu', { 
           		'currentClass': 'active', 
           		'template': 'menu/bootstrap3_menu.html.twig' 
