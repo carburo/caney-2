@@ -12,4 +12,5 @@ menu:
   welcome:
     message: Hi %visitor%
   user:
-    edit: Edit Profile
+    edit: Edit profile
+    changePassword: Change password

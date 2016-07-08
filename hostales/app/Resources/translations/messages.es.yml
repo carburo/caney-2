@@ -13,3 +13,4 @@ menu:
     message: Hola %visitor%
   user:
     edit: Editar perfil
+    changePassword: Cambiar contraseña

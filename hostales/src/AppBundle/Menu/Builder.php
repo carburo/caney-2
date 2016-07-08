@@ -62,6 +62,10 @@ class Builder implements ContainerAwareInterface
             $menu['User']->addChild($translator->trans('menu.user.edit'), [
                 'route' => 'fos_user_profile_edit'
             ])->setAttribute('icon', 'icon icon-edit');
+            
+            $menu['User']->addChild($translator->trans('menu.user.changePassword'), [
+                'route' => 'fos_user_change_password'
+            ])->setAttribute('icon', 'icon icon-key');
         
             $menu['User']->addChild($translator->trans('layout.logout', [], 'FOSUserBundle'), [
                 'route' => 'fos_user_security_logout'
