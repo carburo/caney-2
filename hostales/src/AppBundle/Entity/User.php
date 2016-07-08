@@ -4,13 +4,16 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * User
  *
  * @ORM\Table(name="fos_user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @Vich\Uploadable
  */
 class User extends BaseUser
 {
@@ -22,6 +25,29 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="profilePicture", type="string", length=255, nullable=true)
+     */
+    private $profilePicture;
+    
+    /**
+     * @Vich\UploadableField(mapping="profile_images", fileNameProperty="profilePicture")
+     * @var File
+     * @Assert\Image(
+     * maxSize = "2048k"
+     * )
+     */
+    private $imageFile;
+    
+    /**
+     * @var date
+     *
+     * @ORM\Column(name="updatedAt", type="date", nullable=true)
+     */
+    private $updatedAt;
 
     /**
      * @var string
@@ -96,6 +122,41 @@ class User extends BaseUser
     public function setCountry($country)
     {
         $this->country = $country;
+    }
+
+    public function getProfilePicture()
+    {
+        return $this->profilePicture;
+    }
+
+    public function setProfilePicture($profilePicture)
+    {
+        $this->profilePicture = $profilePicture;
+        return $this;
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(File $imageFile = null)
+    {
+        $this->imageFile = $imageFile;
+        
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($imageFile) {
+            $this->updatedAt = new \DateTime('now');
+        }
+        
+        return $this;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }
 
