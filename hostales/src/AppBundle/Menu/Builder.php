@@ -113,5 +113,34 @@ class Builder implements ContainerAwareInterface
     private function localeName($locale) {
         return ucfirst(Intl::getLocaleBundle()->getLocaleName($locale, $locale));
     }
+    
+    public function user2Menu(FactoryInterface $factory, array $options)
+    {
+        $menu = $factory->createItem('root');
+        $menu->setChildrenAttribute('class', 'nav nav-sidebar');
+    
+        $securityChecker = $this->container->get('security.authorization_checker');
+        $translator = $this->container->get('translator');
+        if ($securityChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+    
+            $menu->addChild($translator->trans('menu.user.edit'), [
+                'route' => 'fos_user_profile_edit'
+            ]);
+    
+            $menu->addChild($translator->trans('menu.user.changePassword'), [
+                'route' => 'fos_user_change_password'
+            ]);
+    
+            $menu->addChild($translator->trans('layout.logout', [], 'FOSUserBundle'), [
+                'route' => 'fos_user_security_logout'
+            ]);
+        } else {
+            $menu->addChild($translator->trans('layout.login', [], 'FOSUserBundle'), [
+                'route' => 'fos_user_security_login'
+            ]);
+        }
+    
+        return $menu;
+    }
 
 }

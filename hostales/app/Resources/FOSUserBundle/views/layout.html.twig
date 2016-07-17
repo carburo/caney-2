@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+	{% block fos_user_heading %}
     <section id="title" class="emerald">
         <div class="container">
             <div class="row">
@@ -17,6 +18,14 @@
             </div>
         </div>
     </section><!--/#title-->
+    {% endblock %}
 
-    {% block fos_user_content %}{% endblock %}
+	{% block fos_user_body %}
+        <section class="container">
+            <div class="col-sm-12">
+    			{% block fos_user_content %}{% endblock %}
+            </div>
+      	</div>
+        </section>
+    {% endblock %}
 {% endblock %}

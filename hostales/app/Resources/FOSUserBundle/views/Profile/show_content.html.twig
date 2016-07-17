@@ -1,42 +1,31 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div class="fos_user_user_show">
-    <section id="contact-page" class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Información general</h2>
-                <p>
-                    <strong>
-                        {{ 'profile.show.username'|trans }}:
-                    </strong>
-                    {{ user.username }}
-                </p>
-                <p>
-                    <strong>
-                        {{ 'profile.show.email'|trans }}:
-                    </strong>
-                    {{ user.email }}
-                </p>
-                <p>
-                    <strong>
-                        {{ 'profile.show.fullName'|trans }}:
-                    </strong>
-                    {{ user.fullName }}
-                </p>
-                <p>
-                    <strong>
-                        {{ 'profile.show.phoneNumber'|trans }}:
-                    </strong>
-                    {{ user.phoneNumber }}
-                </p>
-                <p>
-                    <strong>
-                        {{ 'profile.show.country'|trans }}:
-                    </strong>
-                    {{ user.country|country }}
-                </p>
-                <a class="btn btn-primary" href="{{ path('fos_user_profile_edit') }}">{{ 'profile.change.edit' }}</a>
-            </div>
-        </div>
-    </section>
-</div>
+<p>
+	<strong> {{ 'profile.show.username'|trans }}:
+	</strong>
+	{{ user.username }}
+</p>
+<p>
+	<strong> {{ 'profile.show.email'|trans }}:
+	</strong>
+	{{ user.email }}
+</p>
+
+{% trans_default_domain 'messages' %}
+
+<p>
+	<strong> {{ 'profile.show.fullName'|trans }}:
+	</strong>
+	{{ user.fullName }}
+</p>
+<p>
+	<strong> {{ 'profile.show.phoneNumber'|trans }}:
+	</strong>
+	{{ user.phoneNumber }}
+</p>
+<p>
+	<strong> {{ 'profile.show.country'|trans }}:
+	</strong>
+	{{ user.country|country }}
+</p>
+<a class="btn btn-primary" href="{{ path('fos_user_profile_edit') }}">{{ 'profile.change.edit' }}</a>
