@@ -1,0 +1,21 @@
+form:
+  fullName: Nom et Prénom
+  country: Pays
+  phoneNumber: Téléphone
+  email: Adresse e-mail
+  message: Message
+menu:
+  homepage: Home Page
+  hostels: Chez l'habitant
+  booking: Reserve
+  contact: Contact
+  welcome:
+    message: Bonjour %visitor%
+  user:
+    edit: Éditer profil
+    changePassword: Modifier le mot de passe
+profile:
+  show:
+    fullName: Nom et Prénom
+    phoneNumber: Téléphone
+    country: Pays
