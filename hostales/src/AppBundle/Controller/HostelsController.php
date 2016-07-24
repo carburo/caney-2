@@ -4,7 +4,6 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Location;
 use AppBundle\Entity\Hostel;
-use AppBundle\Entity\Room;
 use AppBundle\Form\HostelType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -25,16 +24,28 @@ class HostelsController extends Controller
             'hostels' => $destination->getHostels(),
         ));
     }
-    
+
     /**
      * @Route("/hostels", name="hostels")
      */
     public function galleryAction(Request $request) {
-        $repo = $this->getDoctrine()->getRepository('AppBundle:Hostel');
+        $repo = $this->getRepository();
         $hostels = $repo->findAll();
         
         return $this->render('hostel/gallery.html.twig', array(
             'hostels' => $hostels,
+        ));
+    }
+
+    /**
+     * @Route("/hostel_search", name="hostel_search")
+     */
+    public function searchAction(Request $request) {
+        $repo = $this->getRepository();
+        $hostels = $repo->findById(1);
+
+        return $this->render('hostel/gallery_content.html.twig', array(
+            'hostels' => $hostels
         ));
     }
 
@@ -91,5 +102,10 @@ class HostelsController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($entity);
         $em->flush();
+    }
+
+    public function getRepository()
+    {
+        return $this->getDoctrine()->getRepository('AppBundle:Hostel');
     }
 }
