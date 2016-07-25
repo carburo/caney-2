@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <form id="search-form">
-                    <input type="search" class="form-control">
+                    <input id="search-box" type="search" class="form-control">
                 </form>
             </div>
         </div>
@@ -24,7 +24,8 @@
     <script>
         var form = $('#search-form');
         form.submit(function () {
-            $.post('{{ path('hostel_search') }}', $(this).serialize(), function(data) {
+            var $query = $('#search-box').val();
+            $.get(Routing.generate('hostel_search', { query: $query, _locale: '{{ app.request.locale }}' }), $(this).serialize(), function(data) {
                 $('#hostel-gallery').html(data);
             });
             return false;

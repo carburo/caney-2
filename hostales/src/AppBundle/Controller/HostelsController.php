@@ -38,11 +38,12 @@ class HostelsController extends Controller
     }
 
     /**
-     * @Route("/hostel_search", name="hostel_search")
+     * @Route("/hostel/search", name="hostel_search", options={"expose"=true})
      */
     public function searchAction(Request $request) {
         $repo = $this->getRepository();
-        $hostels = $repo->findById(1);
+        $query = $request->query->get('query');
+        $hostels = $repo->findByHostelName($query);
 
         return $this->render('hostel/gallery_content.html.twig', array(
             'hostels' => $hostels
