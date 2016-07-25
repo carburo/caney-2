@@ -1,0 +1,27 @@
+form:
+  fullName: Name
+  country: Land
+  phoneNumber: Telefonnummer
+  email: E-Mail
+  message: Botschaft
+button:
+  send: Senden
+menu:
+  homepage: Homepage
+  hostels: Gasthäuser
+  booking: Reservierung
+  contact: Kontakt
+  welcome:
+    message: Hallo %visitor%
+  user:
+    edit: Editar perfil
+    changePassword: Cambiar contraseña
+contact:
+  title: Kontakt
+hostels:
+  title: Gasthäuser
+profile:
+  show:
+    fullName: Name
+    phoneNumber: Telefonnummer
+    country: Land
