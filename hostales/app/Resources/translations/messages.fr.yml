@@ -4,8 +4,10 @@ form:
   phoneNumber: Téléphone
   email: Adresse e-mail
   message: Message
+button:
+  send: Envoyer
 menu:
-  homepage: Home Page
+  homepage: Page d'accueil
   hostels: Chez l'habitant
   booking: Reserve
   contact: Contact
@@ -14,6 +16,10 @@ menu:
   user:
     edit: Éditer profil
     changePassword: Modifier le mot de passe
+contact:
+  title: Contact
+hostels:
+  title: Chez l'habitant
 profile:
   show:
     fullName: Nom et Prénom

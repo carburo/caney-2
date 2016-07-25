@@ -4,6 +4,8 @@ form:
   phoneNumber: Phone number
   email: Email
   message: Message
+button:
+  send: Send
 menu:
   homepage: Homepage
   hostels: Hostels
@@ -14,3 +16,12 @@ menu:
   user:
     edit: Edit profile
     changePassword: Change password
+contact:
+  title: Contact
+hostels:
+  title: Hostels
+profile:
+  show:
+    fullName: Full name
+    phoneNumber: Phone number
+    country: Country

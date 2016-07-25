@@ -4,6 +4,8 @@ form:
   phoneNumber: Teléfono
   email: Correo electrónico
   message: Mensaje
+button:
+  send: Enviar
 menu:
   homepage: Inicio
   hostels: Hostales
@@ -14,6 +16,10 @@ menu:
   user:
     edit: Editar perfil
     changePassword: Cambiar contraseña
+contact:
+  title: Contacto
+hostels:
+  title: Hostales
 profile:
   show:
     fullName: Nombre completo
