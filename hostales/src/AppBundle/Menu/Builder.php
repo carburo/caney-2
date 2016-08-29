@@ -46,12 +46,12 @@ class Builder implements ContainerAwareInterface
         $translator = $this->container->get('translator');
         if ($securityChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $securityContext = $this->container->get('security.token_storage');
-            $username = $securityContext->getToken()
-            ->getUser()
-            ->getUsername();
+            $userForename = $securityContext->getToken()
+                ->getUser()
+                ->getForename();
         
             $userMessage = $translator->trans('menu.welcome.message', [
-                '%visitor%' => $username
+                '%visitor%' => $userForename
             ]);
         
             // create another menu item

@@ -52,15 +52,28 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="full_name", type="string", length=255)
-     * @Assert\NotBlank(message="Please enter your name.", groups={"Registration", "Profile"})
+     * @ORM\Column(name="forename", type="string", length=255)
+     * @Assert\NotBlank(message="Please enter your firstname.", groups={"Registration", "Profile"})
      * @Assert\Length(
      *     max=255,
      *     maxMessage="The name is too long.",
      *     groups={"Registration", "Profile"}
      * )
      */
-    private $fullName;
+    private $forename;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="surename", type="string", length=255)
+     * @Assert\NotBlank(message="Please enter your surename.", groups={"Registration", "Profile"})
+     * @Assert\Length(
+     *     max=255,
+     *     maxMessage="The name is too long.",
+     *     groups={"Registration", "Profile"}
+     * )
+     */
+    private $surename;
 
     /**
      * @var string
@@ -79,23 +92,47 @@ class User extends BaseUser
     /**
      * @return string
      */
-    public function getFullName()
+    public function getForename(): string
     {
-        return $this->fullName;
+        return $this->forename;
     }
 
     /**
-     * @param string $fullName
+     * @param string $forename
      */
-    public function setFullName($fullName)
+    public function setForename(string $forename)
     {
-        $this->fullName = $fullName;
+        $this->forename = $forename;
     }
 
     /**
      * @return string
      */
-    public function getPhoneNumber()
+    public function getSurename(): string
+    {
+        return $this->surename;
+    }
+
+    /**
+     * @param string $surename
+     */
+    public function setSurename(string $surename)
+    {
+        $this->surename = $surename;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullName(): string
+    {
+        return "{$this->getForename()} {$this->getSurename()}";
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhoneNumber(): string
     {
         return $this->phoneNumber;
     }
@@ -103,7 +140,7 @@ class User extends BaseUser
     /**
      * @param string $phoneNumber
      */
-    public function setPhoneNumber($phoneNumber)
+    public function setPhoneNumber(string $phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
     }
@@ -111,7 +148,7 @@ class User extends BaseUser
     /**
      * @return string
      */
-    public function getCountry()
+    public function getCountry(): string
     {
         return $this->country;
     }
@@ -119,7 +156,7 @@ class User extends BaseUser
     /**
      * @param string $country
      */
-    public function setCountry($country)
+    public function setCountry(string $country)
     {
         $this->country = $country;
     }
