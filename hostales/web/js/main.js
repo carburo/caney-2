@@ -51,7 +51,7 @@ jQuery(function($) {
     //booking form
     var form = $('.booking-form');
     form.submit(function () {
-        $this = $(this);
+        var $this = $(this);
         $.post($(this).attr('action'), $(this).serialize(), function(data) {
             $('#success-message').html(data.message);
             $('#success-div').fadeIn();

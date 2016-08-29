@@ -20,9 +20,7 @@ class HostelsController extends Controller
      * @Route("/hostels/{slug}", name="hostelsByDestination")
      */
     public function galleryByDestinationAction(Request $request, Location $destination) {
-        return $this->render('hostel/gallery.html.twig', array(
-            'hostels' => $destination->getHostels(),
-        ));
+        return $this->hostelGallery($destination->getHostels());
     }
 
     /**
@@ -30,11 +28,13 @@ class HostelsController extends Controller
      */
     public function galleryAction(Request $request) {
         $repo = $this->getRepository();
-        $hostels = $repo->findAll();
-        
-        return $this->render('hostel/gallery.html.twig', array(
+        return $this->hostelGallery($repo->findAll());
+    }
+
+    private function hostelGallery($hostels) {
+        return $this->render('hostel/gallery.html.twig', [
             'hostels' => $hostels,
-        ));
+        ]);
     }
 
     /**
@@ -43,11 +43,11 @@ class HostelsController extends Controller
     public function searchAction(Request $request) {
         $repo = $this->getRepository();
         $query = $request->query->get('query');
-        $hostels = $repo->findByHostelName($query);
+        $hostels = $repo->search($query);
 
-        return $this->render('hostel/gallery_content.html.twig', array(
+        return $this->render('hostel/gallery_content.html.twig', [
             'hostels' => $hostels
-        ));
+        ]);
     }
 
     /**
@@ -66,9 +66,9 @@ class HostelsController extends Controller
             $this->saveInDatabase($hostel);
         }
 
-        return $this->render('hostel/registration.html.twig', array(
+        return $this->render('hostel/registration.html.twig', [
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -82,21 +82,21 @@ class HostelsController extends Controller
 
         if($form->isSubmitted() && $form->isValid()) {
             $this->saveInDatabase($hostel);
-            return $this->redirectToRoute('hostel_view', array('slug' => $hostel->getSlug()));
+            return $this->redirectToRoute('hostel_view', ['slug' => $hostel->getSlug()]);
         }
 
-        return $this->render('hostel/edit.html.twig', array(
+        return $this->render('hostel/edit.html.twig', [
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**
      * @Route("/hostel/{slug}", name="hostel_view")
      */
     public function viewAction(Request $request, Hostel $hostel) {
-        return $this->render('hostel/view.html.twig', array(
+        return $this->render('hostel/view.html.twig', [
             'hostel' => $hostel
-        ));
+        ]);
     }
 
     private function saveInDatabase($entity) {
