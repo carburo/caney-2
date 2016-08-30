@@ -5,11 +5,18 @@
 {% endblock %}
 
 {% block body %}
-    <section id="title" class="emerald" xmlns="http://www.w3.org/1999/html">
-        <div class="container">
-            <div class="row">
+    <section class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                {{ knp_menu_render('AppBundle:HostelMenuBuilder:mainMenu', {
+                    'currentClass': 'active',
+                    'menu_template': 'SonataBlockBundle:Block:block_side_menu_template.html.twig'
+                }) }}
+            </div>
+
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <div class="col-sm-6">
-                    <h1>{% trans %}title.contact{% endtrans %}</h1>
+                    <h2>{% trans %}title.contact{% endtrans %}</h2>
                     <p>{% trans %}subtitle.contact{% endtrans %}</p>
                 </div>
                 <div class="col-sm-6">
@@ -18,20 +25,15 @@
                         <li class="active">{% trans %}menu.contact{% endtrans %}</li>
                     </ul>
                 </div>
+                <div class="col-sm-12">
+                    {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg">{% trans %}button.send{% endtrans %}</button>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
             </div>
         </div>
-    </section><!--/#title-->
-
-    <section id="hostel-registration-page" class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                {{ form_start(form) }}
-                    {{ form_widget(form) }}
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-lg">{% trans %}button.send{% endtrans %}</button>
-                    </div>
-                {{ form_end(form) }}
-            </div><!--/.col-sm-8-->
-        </div>
-    </section><!--/#contact-page-->
+    </section>
 {% endblock %}

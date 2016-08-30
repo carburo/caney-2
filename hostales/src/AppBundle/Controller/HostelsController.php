@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Location;
 use AppBundle\Entity\Hostel;
 use AppBundle\Form\HostelType;
+use AppBundle\Repository\HostelRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -105,7 +106,7 @@ class HostelsController extends Controller
         $em->flush();
     }
 
-    public function getRepository()
+    public function getRepository(): HostelRepository
     {
         return $this->getDoctrine()->getRepository('AppBundle:Hostel');
     }

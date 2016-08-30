@@ -78,14 +78,14 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="phone_number", type="string", length=255, nullable=true)
+     * @ORM\Column(name="phone_number", type="string", length=255)
      */
     private $phoneNumber;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="country", type="string", length=2, nullable=true)
+     * @ORM\Column(name="country", type="string", length=2)
      */
     private $country;
 
