@@ -92,7 +92,7 @@ class User extends BaseUser
     /**
      * @return string
      */
-    public function getForename(): string
+    public function getForename()
     {
         return $this->forename;
     }
@@ -100,7 +100,7 @@ class User extends BaseUser
     /**
      * @param string $forename
      */
-    public function setForename(string $forename)
+    public function setForename($forename)
     {
         $this->forename = $forename;
     }
@@ -108,7 +108,7 @@ class User extends BaseUser
     /**
      * @return string
      */
-    public function getSurename(): string
+    public function getSurename()
     {
         return $this->surename;
     }
@@ -116,7 +116,7 @@ class User extends BaseUser
     /**
      * @param string $surename
      */
-    public function setSurename(string $surename)
+    public function setSurename($surename)
     {
         $this->surename = $surename;
     }
@@ -124,7 +124,7 @@ class User extends BaseUser
     /**
      * @return string
      */
-    public function getFullName(): string
+    public function getFullName()
     {
         return "{$this->getForename()} {$this->getSurename()}";
     }
@@ -132,7 +132,7 @@ class User extends BaseUser
     /**
      * @return string
      */
-    public function getPhoneNumber(): string
+    public function getPhoneNumber()
     {
         return $this->phoneNumber;
     }
@@ -140,7 +140,7 @@ class User extends BaseUser
     /**
      * @param string $phoneNumber
      */
-    public function setPhoneNumber(string $phoneNumber)
+    public function setPhoneNumber($phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
     }
@@ -148,7 +148,7 @@ class User extends BaseUser
     /**
      * @return string
      */
-    public function getCountry(): string
+    public function getCountry()
     {
         return $this->country;
     }
@@ -156,7 +156,7 @@ class User extends BaseUser
     /**
      * @param string $country
      */
-    public function setCountry(string $country)
+    public function setCountry($country)
     {
         $this->country = $country;
     }

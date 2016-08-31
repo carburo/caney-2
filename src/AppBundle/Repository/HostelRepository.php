@@ -13,7 +13,7 @@ use Doctrine\ORM\Query\ResultSetMappingBuilder;
  */
 class HostelRepository extends EntityRepository
 {
-    public function search(string $searchTerm) {
+    public function search($searchTerm) {
         $em = $this->getEntityManager();
         $mapping = new ResultSetMappingBuilder($em);
         $mapping->addRootEntityFromClassMetadata('AppBundle\Entity\Hostel', 'h');

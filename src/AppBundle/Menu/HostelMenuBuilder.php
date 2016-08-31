@@ -18,7 +18,7 @@ class HostelMenuBuilder implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
-    public function mainMenu(FactoryInterface $factory, array $options): ItemInterface {
+    public function mainMenu(FactoryInterface $factory, array $options) {
         $menu = $factory->createItem("root");
         $menu->setChildrenAttribute('class', 'nav nav-sidebar');
 
