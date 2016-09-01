@@ -47,33 +47,37 @@
                 </ul>
                 <h3>{% trans %}title.home.descriptions{% endtrans %}</h3>
                 <ul>
-                    <li>{% trans with { '%option%': hostel.childrenAccepted } %}label.children.accepted{% endtrans %}</li>
-                    <li>{% trans with { '%option%': hostel.garage } %}label.garage{% endtrans %}</li>
-                    <li>{% trans with { '%option%': hostel.laundry } %}label.laundry{% endtrans %}</li>
-                    <li>{% trans with { '%option%': hostel.swimmingPool } %}label.swimmingPool{% endtrans %}</li>
-                    <li>{% trans with { '%option%': hostel.internet } %}label.internet{% endtrans %}</li>
-                    <li>{% trans with { '%option%': hostel.wifi } %}label.wifi{% endtrans %}</li>
+                    <li>{% transchoice hostel.childrenAccepted %}children.accepted{% endtranschoice %}</li>
+                    {% if hostel.garage %}
+                        <li>{% trans with { '%price%': hostel.garagePrice } %}garage.price{% endtrans %}</li>
+                    {% else %}
+                        <li>{{ 'garage.label'|trans }}: <strong>{{ 'label.notAvailable'|trans }}</strong></li>
+                    {% endif %}
+                    <li>{% transchoice hostel.laundry %}laundry.label{% endtranschoice %}</li>
+                    {% if hostel.swimmingPool %}<li>{{ 'swimmingPool.label'|trans }}</li>{% endif %}
+                    <li>{% transchoice hostel.internet %}internet.label{% endtranschoice %}</li>
+                    <li>{% transchoice hostel.wifi %}wifi.label{% endtranschoice %}</li>
                 </ul>
-                <h3>{% trans %}title.food.prices{% endtrans %}</h3>
+                <h3>{% trans %}title.food{% endtrans %}</h3>
                 <ul>
                     {% if hostel.breakfast %}
-                        <li>{% trans with {'%price%': hostel.breakfastPrice } %}label.breakfast.price{% endtrans %}</li>
+                        <li>{% trans with {'%price%': hostel.breakfastPrice } %}breakfast.price{% endtrans %}</li>
                     {% else %}
-                        <li>{{ 'label.breakfast'|trans }}: <strong>{{ 'label.not.available'|trans }}</strong></li>
+                        <li>{{ 'breakfast.label'|trans }}: <strong>{{ 'label.notAvailable'|trans }}</strong></li>
                     {% endif %}
                     {% if hostel.dinner %}
-                        <li>{% trans with {'%price%': hostel.dinnerPrice } %}label.dinner.price{% endtrans %}</li>
+                        <li>{% trans with {'%price%': hostel.dinnerPrice } %}dinner.price{% endtrans %}</li>
                     {% else %}
-                        <li>{{ 'label.dinner'|trans }}: <strong>{{ 'label.not.available'|trans }}</strong></li>
+                        <li>{{ 'dinner.label'|trans }}: <strong>{{ 'label.notAvailable'|trans }}</strong></li>
                     {% endif %}
-                    {% if hostel.cocktails %}<li>{{ 'label.cocktails'|trans }}</li>{% endif %}
+                    {% if hostel.cocktails %}<li>{{ 'cocktails.label'|trans }}</li>{% endif %}
                 </ul>
-                {% if hostel.otherServices is not empty %}
+                {% if hostel.guide or hostel.horseRide or hostel.scubaDiving %}
                     <h3>{% trans %}title.other.services{% endtrans %}</h3>
                     <ul>
-                        {% for service in hostel.otherServices %}
-                            <li>{{ service.description }}</li>
-                        {% endfor %}
+                        {% if hostel.guide %}<li>{{ 'guide.label'|trans }}</li>{% endif %}
+                        {% if hostel.horseRide %}<li>{{ 'horseRide.label'|trans }}</li>{% endif %}
+                        {% if hostel.scubaDiving %}<li>{{ 'scubaDiving.label'|trans }}</li>{% endif %}
                     </ul>
                 {% endif %}
                 <h3>{% trans %}title.host.languages{% endtrans %}</h3>
@@ -100,11 +104,4 @@
             </div><!--/.col-sm-4-->
         </div>
     </section><!--/#contact-page-->
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    {#<script type="text/javascript">#}
-        {#$('#portfolioMenu').addClass('active')#}
-    {#</script>#}
 {% endblock %}

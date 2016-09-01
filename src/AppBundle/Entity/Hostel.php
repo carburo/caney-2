@@ -86,7 +86,7 @@ class Hostel
      * @ORM\Column(name="breakfast_price", type="decimal", precision=10, scale=2, nullable=true)
      */
     private $breakfastPrice;
-    
+
     /**
      * @var bool
      *
@@ -114,7 +114,7 @@ class Hostel
      * @ORM\Column(name="children", type="boolean")
      */
     private $childrenAccepted;
-   
+
     /**
      * @var bool
      *
@@ -142,6 +142,27 @@ class Hostel
      * @ORM\Column(name="laundry", type="boolean")
      */
     private $laundry;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="guide", type="boolean")
+     */
+    private $guide;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="horse_ride", type="boolean")
+     */
+    private $horseRide;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="scuba_diving", type="boolean")
+     */
+    private $scubaDiving;
 
     /**
      * @var bool
@@ -174,15 +195,25 @@ class Hostel
      */
     private $active;
 
-    /**
-     *
-     * @ORM\ManyToMany(targetEntity="OtherServices")
-     * @ORM\JoinTable(name="services_by_hostel",
-     *      joinColumns={@ORM\JoinColumn(name="hostel_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="service_id", referencedColumnName="id")}
-     *      )
-     */
-    private $otherServices;
+//    /**
+//     *
+//     * @ORM\ManyToMany(targetEntity="OtherServices")
+//     * @ORM\JoinTable(name="services_by_hostel",
+//     *      joinColumns={@ORM\JoinColumn(name="hostel_id", referencedColumnName="id")},
+//     *      inverseJoinColumns={@ORM\JoinColumn(name="service_id", referencedColumnName="id")}
+//     *      )
+//     */
+//    private $otherServices;
+
+//    /**
+//     *
+//     * @ORM\ManyToMany(targetEntity="Service")
+//     * @ORM\JoinTable(name="service_by_hostel",
+//     *      joinColumns={@ORM\JoinColumn(name="hostel_id", referencedColumnName="id")},
+//     *      inverseJoinColumns={@ORM\JoinColumn(name="service_id", referencedColumnName="id")}
+//     *      )
+//     */
+//    private $services;
 
     /**
      * @var Location
@@ -401,6 +432,54 @@ class Hostel
     }
 
     /**
+     * @return mixed
+     */
+    public function getGuide()
+    {
+        return $this->guide;
+    }
+
+    /**
+     * @param mixed $guide
+     */
+    public function setGuide($guide)
+    {
+        $this->guide = $guide;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isHorseRide()
+    {
+        return $this->horseRide;
+    }
+
+    /**
+     * @param boolean $horseRide
+     */
+    public function setHorseRide($horseRide)
+    {
+        $this->horseRide = $horseRide;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isScubaDiving()
+    {
+        return $this->scubaDiving;
+    }
+
+    /**
+     * @param boolean $scubaDiving
+     */
+    public function setScubaDiving($scubaDiving)
+    {
+        $this->scubaDiving = $scubaDiving;
+    }
+
+    /**
      * @return ArrayCollection
      */
     public function getRooms()
@@ -414,22 +493,6 @@ class Hostel
     public function setRooms($rooms)
     {
         $this->rooms = $rooms;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOtherServices()
-    {
-        return $this->otherServices;
-    }
-
-    /**
-     * @param mixed $otherServices
-     */
-    public function setOtherServices($otherServices)
-    {
-        $this->otherServices = $otherServices;
     }
 
     /**

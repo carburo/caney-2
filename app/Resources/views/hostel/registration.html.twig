@@ -9,8 +9,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1>{% trans %}title.contact{% endtrans %}</h1>
-                    <p>{% trans %}subtitle.contact{% endtrans %}</p>
+                    <h1>{% trans %}title.registration{% endtrans %}</h1>
+                    <p>{% trans %}subtitle.registration{% endtrans %}</p>
                 </div>
                 <div class="col-sm-6">
                     <ul class="breadcrumb pull-right">
@@ -22,16 +22,45 @@
         </div>
     </section><!--/#title-->
 
-    <section id="hostel-registration-page" class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                {{ form_start(form, {'attr': {'class': 'form-hostel-registration'}}) }}
-                    {{ form_widget(form) }}
+    <section id="hostel-registration-page">
+        <div class="container">
+            {{ form_start(form) }}
+            {#{{ form_widget(form) }}#}
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    {{ form_row(form.hostelName) }}
+                    {{ form_row(form.description) }}
+                    {{ form_row(form.hostLanguages) }}
+                    {{ form_row(form.location) }}
+                    {{ form_row(form.address) }}
+                    {{ form_row(form.website) }}
+                    {{ form_row(form.childrenAccepted) }}
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    {{ form_row(form.breakfast) }}
+                    {{ form_row(form.breakfastPrice) }}
+                    {{ form_row(form.dinner) }}
+                    {{ form_row(form.dinnerPrice) }}
+                    {{ form_row(form.cocktails) }}
+                    {{ form_row(form.garage) }}
+                    {{ form_row(form.garagePrice) }}
+                    {{ form_row(form.swimmingPool) }}
+                    {{ form_row(form.laundry) }}
+                    {{ form_row(form.guide) }}
+                    {{ form_row(form.horseRide) }}
+                    {{ form_row(form.scubaDiving) }}
+                    {{ form_row(form.internet) }}
+                    {{ form_row(form.wifi) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-lg">{% trans %}button.send{% endtrans %}</button>
                     </div>
-                {{ form_end(form) }}
+                </div>
             </div>
+            {{ form_end(form) }}
         </div>
     </section><!--/#contact-page-->
 {% endblock %}

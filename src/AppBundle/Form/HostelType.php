@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -21,9 +22,11 @@ class HostelType extends AbstractType
         $builder
             ->add('hostelName')
             ->add('description', TextareaType::class)
-            ->add('owner')
+//            ->add('owner', HiddenType::class)
             ->add('address')
-            ->add('website', UrlType::class)
+            ->add('website', UrlType::class, [
+                'required' => false
+            ])
             ->add('hostLanguages')
             ->add('breakfast')
             ->add('breakfastPrice', MoneyType::class, [
@@ -44,17 +47,20 @@ class HostelType extends AbstractType
             ->add('internet')
             ->add('wifi')
             ->add('location')
-            ->add('otherServices', null, array(
-                'expanded' => 'true'
-            ))
-            ->add('rooms', CollectionType::class, [
-                'entry_type' => RoomType::class,
-                'allow_add' => true,
-            ])
-            ->add('images', CollectionType::class, [
-                'entry_type' => HostelImageType::class,
-                'allow_add' => true,
-            ])
+            ->add('guide')
+            ->add('scubaDiving')
+            ->add('horseRide')
+//            ->add('otherServices', null, array(
+//                'expanded' => 'true'
+//            ))
+//            ->add('rooms', CollectionType::class, [
+//                'entry_type' => RoomType::class,
+//                'allow_add' => true,
+//            ])
+//            ->add('images', CollectionType::class, [
+//                'entry_type' => HostelImageType::class,
+//                'allow_add' => true,
+//            ])
         ;
     }
     

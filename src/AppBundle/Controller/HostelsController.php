@@ -59,12 +59,16 @@ class HostelsController extends Controller
         $hostel = new Hostel();
 
         $this->denyAccessUnlessGranted('create', $hostel);
-        $form = $this->createForm(HostelType::class, $hostel);
 
+        $hostel->setOwner($this->getUser());
+        $hostel->setActive(false);
+
+        $form = $this->createForm(HostelType::class, $hostel);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
             $this->saveInDatabase($hostel);
+            return $this->redirectToRoute('hostel_edit', ['slug' => $hostel->getSlug()]);
         }
 
         return $this->render('hostel/registration.html.twig', [
@@ -106,7 +110,7 @@ class HostelsController extends Controller
         $em->flush();
     }
 
-    public function getRepository(): HostelRepository
+    public function getRepository()
     {
         return $this->getDoctrine()->getRepository('AppBundle:Hostel');
     }

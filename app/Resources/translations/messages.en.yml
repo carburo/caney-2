@@ -25,3 +25,32 @@ profile:
     fullName: Full name
     phoneNumber: Phone number
     country: Country
+breakfast:
+  label: Breakfast
+  price: "Breakfast: %price% CUC"
+dinner:
+  label: Dinner
+  price: "Dinner: %price% CUC"
+children:
+  accepted: "Children accepted | Children not accepted"
+garage:
+  label: Garage
+  price: "Garage: %price% CUC per night"
+cocktails:
+  label: Coktails
+guide:
+  label: Tourist guide
+horseRide:
+  label: Horse ride
+scubaDiving:
+  label: Scuba Diving
+laundry:
+  label: Laundry | Laundry <strong>Not available</strong>
+swimmingPool:
+  label: Swimming Pool
+internet:
+  label: Internet | Internet <strong>Not available</strong>
+wifi:
+  label: Wi-Fi | Wi-Fi <strong>Not available</strong>
+label:
+  notAvailable: Not available

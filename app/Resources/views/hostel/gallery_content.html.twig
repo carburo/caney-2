@@ -3,9 +3,11 @@
         <div class="item-inner">
             {% set image = hostel.images|first %}
             <a href="{{ path('hostel_view', {'slug' : hostel.slug}) }}">
+                {% if image is not empty %}
                 <img class="img-thumbnail"
                      src="{{ vich_uploader_asset(image, 'imageFile')|imagine_filter('app_thumb') }}"
                      alt="{{ hostel.hostelName }}">
+                {% endif %}
                 <h5>{{ hostel.hostelName }}</h5>
             </a>
         </div>

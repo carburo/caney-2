@@ -90,6 +90,13 @@ class User extends BaseUser
     private $country;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="owner", type="boolean")
+     */
+    private $owner;
+
+    /**
      * @return string
      */
     public function getForename()
@@ -159,6 +166,22 @@ class User extends BaseUser
     public function setCountry($country)
     {
         $this->country = $country;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isOwner()
+    {
+        return $this->owner;
+    }
+
+    /**
+     * @param boolean $owner
+     */
+    public function setOwner($owner)
+    {
+        $this->owner = $owner;
     }
 
     public function getProfilePicture()
