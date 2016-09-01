@@ -34,14 +34,14 @@
                 <h3>{% trans %}title.rooms{% endtrans %}</h3>
                 <ul>
                     {% for room in hostel.rooms %}
-                        <li><strong>{{ room.name }}:</strong> {{ room.typeOfRoom.name }},
-                            {% transchoice room.capacity with {'%capacity%': room.capacity} %}label.room.capacity{% endtranschoice %}
-                            {% if room.description is not empty %}, {{ room.description }}{% endif %}
-                            (
-                                <abbr title="{{ 'label.lowSeason'|trans }}"><i class="icon icon-arrow-down"></i></abbr> ${{ room.priceInLow }}
-                            /
-                            <abbr title="{{ 'label.highSeason'|trans }}"><i class="icon icon-arrow-up"></i></abbr> ${{ room.priceInHigh }}
-                            )
+                        <li>
+                            <a href="{{ path('room_view', {'id': room.id }) }}">
+                                <strong>{{ room.name }}:</strong>
+                                {% transchoice room.capacity with {'%capacity%': room.capacity} %}room.capacity.label{% endtranschoice %}
+                                (<abbr title="{{ 'label.lowSeason'|trans }}"><i class="icon icon-arrow-down"></i></abbr> ${{ room.priceInLow }}
+                                /
+                                <abbr title="{{ 'label.highSeason'|trans }}"><i class="icon icon-arrow-up"></i></abbr> ${{ room.priceInHigh }})
+                            </a>
                         </li>
                     {% endfor %}
                 </ul>

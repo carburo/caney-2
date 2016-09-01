@@ -1,0 +1,108 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ room.hostel.hostelName }}
+{% endblock %}
+
+{% block body %}
+    {{ include('photo-swipe.html.twig') }}
+
+    <section id="title" class="emerald">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1>{{ room.hostel.hostelName }}</h1>
+                    <p>{{ room.name }}</p>
+                </div>
+                <div class="col-sm-6">
+                    <ul class="breadcrumb pull-right">
+                        <li><a href="{{ path('homepage') }}">{% trans %}menu.homepage{% endtrans %}</a></li>
+                        <li><a href="{{ path('hostels') }}">{% trans %}menu.hostels{% endtrans %}</a></li>
+                        <li><a href="{{ path('hostelsByDestination', {'slug' : room.hostel.location.slug }) }}">{{ room.hostel.location.name }}</a></li>
+                        <li><a href="{{ path('hostel_view', {'slug' : room.hostel.slug }) }}">{{ room.hostel.hostelName }}</a></li>
+                        <li class="active">{{ room.name }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section><!--/#title-->
+
+    {#<section id="contact-page" class="container">#}
+        {#<div class="row">#}
+            {#<div class="col-sm-5">#}
+                {#<h3>{% trans %}title.address{% endtrans %}</h3>#}
+                {#<p>{{ hostel.address }}</p>#}
+                {#<h3>{% trans %}title.rooms{% endtrans %}</h3>#}
+                {#<ul>#}
+                    {#{% for room in hostel.rooms %}#}
+                        {#<li>#}
+                            {#<a href="{{ path('room_view', {'id': room.id }) }}">#}
+                                {#<strong>{{ room.name }}:</strong>#}
+                                {#{% transchoice room.capacity with {'%capacity%': room.capacity} %}room.capacity.label{% endtranschoice %}#}
+                                {#(<abbr title="{{ 'label.lowSeason'|trans }}"><i class="icon icon-arrow-down"></i></abbr> ${{ room.priceInLow }}#}
+                                {#/#}
+                                {#<abbr title="{{ 'label.highSeason'|trans }}"><i class="icon icon-arrow-up"></i></abbr> ${{ room.priceInHigh }})#}
+                            {#</a>#}
+                        {#</li>#}
+                    {#{% endfor %}#}
+                {#</ul>#}
+                {#<h3>{% trans %}title.home.descriptions{% endtrans %}</h3>#}
+                {#<ul>#}
+                    {#<li>{% transchoice hostel.childrenAccepted %}children.accepted{% endtranschoice %}</li>#}
+                    {#{% if hostel.garage %}#}
+                        {#<li>{% trans with { '%price%': hostel.garagePrice } %}garage.price{% endtrans %}</li>#}
+                    {#{% else %}#}
+                        {#<li>{{ 'garage.label'|trans }}: <strong>{{ 'label.notAvailable'|trans }}</strong></li>#}
+                    {#{% endif %}#}
+                    {#<li>{% transchoice hostel.laundry %}laundry.label{% endtranschoice %}</li>#}
+                    {#{% if hostel.swimmingPool %}<li>{{ 'swimmingPool.label'|trans }}</li>{% endif %}#}
+                    {#<li>{% transchoice hostel.internet %}internet.label{% endtranschoice %}</li>#}
+                    {#<li>{% transchoice hostel.wifi %}wifi.label{% endtranschoice %}</li>#}
+                {#</ul>#}
+                {#<h3>{% trans %}title.food{% endtrans %}</h3>#}
+                {#<ul>#}
+                    {#{% if hostel.breakfast %}#}
+                        {#<li>{% trans with {'%price%': hostel.breakfastPrice } %}breakfast.price{% endtrans %}</li>#}
+                    {#{% else %}#}
+                        {#<li>{{ 'breakfast.label'|trans }}: <strong>{{ 'label.notAvailable'|trans }}</strong></li>#}
+                    {#{% endif %}#}
+                    {#{% if hostel.dinner %}#}
+                        {#<li>{% trans with {'%price%': hostel.dinnerPrice } %}dinner.price{% endtrans %}</li>#}
+                    {#{% else %}#}
+                        {#<li>{{ 'dinner.label'|trans }}: <strong>{{ 'label.notAvailable'|trans }}</strong></li>#}
+                    {#{% endif %}#}
+                    {#{% if hostel.cocktails %}<li>{{ 'cocktails.label'|trans }}</li>{% endif %}#}
+                {#</ul>#}
+                {#{% if hostel.guide or hostel.horseRide or hostel.scubaDiving %}#}
+                    {#<h3>{% trans %}title.other.services{% endtrans %}</h3>#}
+                    {#<ul>#}
+                        {#{% if hostel.guide %}<li>{{ 'guide.label'|trans }}</li>{% endif %}#}
+                        {#{% if hostel.horseRide %}<li>{{ 'horseRide.label'|trans }}</li>{% endif %}#}
+                        {#{% if hostel.scubaDiving %}<li>{{ 'scubaDiving.label'|trans }}</li>{% endif %}#}
+                    {#</ul>#}
+                {#{% endif %}#}
+                {#<h3>{% trans %}title.host.languages{% endtrans %}</h3>#}
+                {#<p>{{ hostel.hostLanguages|split(' ')|locales|join(', ') }}</p>#}
+
+                {#<a class="btn btn-primary btn-lg" href="{{ path('booking', {'slug' : hostel.slug}) }}">{% trans %}button.book{% endtrans %}</a>#}
+
+            {#</div><!--/.col-sm-8-->#}
+            {#<div class="col-sm-7">#}
+                {#<ul class="portfolio-items col-2 swipe-gallery">#}
+                    {#{% for image in hostel.images %}#}
+                        {#<li class="portfolio-item">#}
+                            {#<div class="item-inner">#}
+                                {#<figure data-order="{{ loop.index - 1 }}" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">#}
+                                    {#<a href="{{ vich_uploader_asset(image, 'imageFile')|imagine_filter('app_image') }}" itemprop="contentUrl" data-size="{{ image.pixelWidth }}x{{ image.pixelHeight }}">#}
+                                        {#<img src="{{ vich_uploader_asset(image, 'imageFile')|imagine_filter('app_thumb') }}" itemprop="thumbnail" alt="{{ hostel.hostelName ~ ' | ' ~ image.description }}" />#}
+                                    {#</a>#}
+                                    {#<figcaption itemprop="caption description">{{ image.description }}</figcaption>#}
+                                {#</figure>#}
+                            {#</div>#}
+                        {#</li><!--/.portfolio-item-->#}
+                    {#{% endfor %}#}
+                {#</ul>#}
+            {#</div><!--/.col-sm-4-->#}
+        {#</div>#}
+    {#</section><!--/#contact-page-->#}
+{% endblock %}

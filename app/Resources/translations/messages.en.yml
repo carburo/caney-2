@@ -52,5 +52,8 @@ internet:
   label: Internet | Internet <strong>Not available</strong>
 wifi:
   label: Wi-Fi | Wi-Fi <strong>Not available</strong>
+room:
+  capacity:
+    label: "{1}One person|]1,Inf[ %capacity% persons"
 label:
   notAvailable: Not available
