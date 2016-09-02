@@ -147,6 +147,11 @@ class Room
      */
     private $hostel;
 
+    /**
+     * @ORM\OneToMany(targetEntity="RoomImage", mappedBy="room")
+     */
+    private $images;
+
 
     /**
      * Get id
@@ -460,6 +465,22 @@ class Room
     public function setTelevision($television)
     {
         $this->television = $television;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param mixed $images
+     */
+    public function setImages($images)
+    {
+        $this->images = $images;
     }
 
     public function __toString() {

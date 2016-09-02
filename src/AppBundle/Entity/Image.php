@@ -6,12 +6,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Image
  *
  * @ORM\Table(name="image")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ImageRepository")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn("discr", type="string")
  * @Gedmo\TranslationEntity(class="AppBundle\Entity\ImageTranslation")
  */
 class Image
@@ -31,6 +35,15 @@ class Image
      * @ORM\Column(name="filename", type="string", length=255)
      */
     private $filename;
+
+    /**
+     * @Vich\UploadableField(mapping="hostel_images", fileNameProperty="filename")
+     * @var File
+     * @Assert\Image(
+     * maxSize = "2048k"
+     * )
+     */
+    private $imageFile;
 
     /**
      * @var int
@@ -53,6 +66,13 @@ class Image
      * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
+
+    /**
+     * @var date
+     *
+     * @ORM\Column(name="updatedAt", type="date", nullable=true)
+     */
+    private $updatedAt;
 
     /**
      * @var bool
@@ -129,6 +149,23 @@ class Image
         return $this->filename;
     }
 
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($image) {
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
     /**
      * @return int
      */
@@ -137,13 +174,13 @@ class Image
         return $this->pixelWidth;
     }
 
-    /**
-     * @param int $pixelWidth
-     */
-    public function setPixelWidth($pixelWidth)
-    {
-        $this->pixelWidth = $pixelWidth;
-    }
+//    /**
+//     * @param int $pixelWidth
+//     */
+//    public function setPixelWidth($pixelWidth)
+//    {
+//        $this->pixelWidth = $pixelWidth;
+//    }
 
     /**
      * @return int
@@ -153,13 +190,13 @@ class Image
         return $this->pixelHeight;
     }
 
-    /**
-     * @param int $pixelHeight
-     */
-    public function setPixelHeight($pixelHeight)
-    {
-        $this->pixelHeight = $pixelHeight;
-    }
+//    /**
+//     * @param int $pixelHeight
+//     */
+//    public function setPixelHeight($pixelHeight)
+//    {
+//        $this->pixelHeight = $pixelHeight;
+//    }
 
     /**
      * Set description
