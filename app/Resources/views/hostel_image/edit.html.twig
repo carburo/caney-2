@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {% trans %}title.contact{% endtrans %}
+{% endblock %}
+
+{% set image = form.vars.value %}
+{% set hostel = image.hostel %}
+
+{% block body %}
+    <section class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                {% set menu = knp_menu_get('AppBundle:HostelMenuBuilder:mainMenu', [], {
+                'hostel': hostel
+                }) %}
+                {{ knp_menu_render(menu, {
+                    'currentClass': 'active',
+                    'menu_template': 'SonataBlockBundle:Block:block_side_menu_template.html.twig',
+                }) }}
+            </div>
+
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <div class="col-sm-6">
+                    <h2>{% trans %}title.contact{% endtrans %}</h2>
+                    <p>{% trans %}subtitle.contact{% endtrans %}</p>
+                </div>
+                <div class="col-sm-6">
+                    <ul class="breadcrumb pull-right">
+                        <li><a href="{{ path('homepage') }}">{% trans %}menu.homepage{% endtrans %}</a></li>
+                        <li class="active">{% trans %}menu.contact{% endtrans %}</li>
+                    </ul>
+                </div>
+                <div class="col-sm-12">
+                    {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg">{% trans %}button.send{% endtrans %}</button>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
