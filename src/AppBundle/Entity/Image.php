@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -40,12 +41,12 @@ class Image
 
     /**
      * @Vich\UploadableField(mapping="hostel_images", fileNameProperty="filename")
-     * @var File
+     * @var UploadedFile
      * @Assert\Image(
      * maxSize = "2048k"
      * )
      */
-    private $imageFile;
+    protected $imageFile;
 
     /**
      * @var int

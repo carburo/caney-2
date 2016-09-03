@@ -1,5 +1,11 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
+<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <a href="{{ vich_uploader_asset(user, 'imageFile')|imagine_filter('app_image') }}" itemprop="contentUrl">
+        <img src="{{ vich_uploader_asset(user, 'imageFile')|imagine_filter('app_thumb') }}" itemprop="thumbnail" />
+    </a>
+</figure>
+
 <p>
 	<strong> {{ 'profile.show.username'|trans }}:
 	</strong>

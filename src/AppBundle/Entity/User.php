@@ -4,9 +4,10 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * User
@@ -31,16 +32,16 @@ class User extends BaseUser
      *
      * @ORM\Column(name="profilePicture", type="string", length=255, nullable=true)
      */
-    private $profilePicture;
+    protected $profilePicture;
     
     /**
-     * @Vich\UploadableField(mapping="profile_images", fileNameProperty="profilePicture")
-     * @var File
+     * @Vich\UploadableField(mapping="user_profile_picture", fileNameProperty="profilePicture")
+     * @var UploadedFile
      * @Assert\Image(
      * maxSize = "2048k"
      * )
      */
-    private $imageFile;
+    protected $imageFile;
     
     /**
      * @var date
