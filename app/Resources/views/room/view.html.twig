@@ -11,8 +11,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1>{{ room.hostel.hostelName }}</h1>
-                    <p>{{ room.name }}</p>
+                    <h2>{{ room.name }}</h2>
+                    <h3>{{ room.hostel.hostelName }}</h3>
                 </div>
                 <div class="col-sm-6">
                     <ul class="breadcrumb pull-right">
@@ -27,11 +27,12 @@
         </div>
     </section><!--/#title-->
 
-    {#<section id="contact-page" class="container">#}
-        {#<div class="row">#}
-            {#<div class="col-sm-5">#}
-                {#<h3>{% trans %}title.address{% endtrans %}</h3>#}
-                {#<p>{{ hostel.address }}</p>#}
+    <section id="contact-page" class="container">
+        <div class="row">
+            <div class="col-sm-5">
+                <p>{{ room.description }}</p>
+                {#<h3>{% trans %}room.descriptions.title{% endtrans %}</h3>#}
+                {#<p>{{ room.typeOfRoom }}</p>#}
                 {#<h3>{% trans %}title.rooms{% endtrans %}</h3>#}
                 {#<ul>#}
                     {#{% for room in hostel.rooms %}#}
@@ -46,9 +47,35 @@
                         {#</li>#}
                     {#{% endfor %}#}
                 {#</ul>#}
-                {#<h3>{% trans %}title.home.descriptions{% endtrans %}</h3>#}
-                {#<ul>#}
-                    {#<li>{% transchoice hostel.childrenAccepted %}children.accepted{% endtranschoice %}</li>#}
+                <h3>{% trans %}room.descriptions.title{% endtrans %}</h3>
+                <ul>
+                    <li>{% transchoice room.privateBathroom %}room.privateBathroom.label{% endtranschoice %}</li>
+                    {% if room.hotWater %}
+                        <li>{{ 'room.hotWater.label' | trans }}</li>
+                    {% endif %}
+                    <li>{% transchoice room.airConditioner %}room.airConditioner.label{% endtranschoice %}</li>
+                    {% if room.voltage120 or room.voltage240 %}
+                        <li>{{ 'room.voltage.label' | trans({'%voltage%': room.voltage | join(', ')}) }}</li>
+                    {% endif %}
+                    {% if room.privateEntrance %}
+                        <li>{{ 'room.privateEntrance.label' | trans }}</li>
+                    {% endif %}
+                    {% if room.safe %}
+                        <li>{{ 'room.safe.label' | trans }}</li>
+                    {% endif %}
+                    {% if room.terrace %}
+                        <li>{{ 'room.terrace.label' | trans }}</li>
+                    {% endif %}
+                    {% if room.minibar %}
+                        <li>{{ 'room.minibar.label' | trans }}</li>
+                    {% endif %}
+                    {% if room.hairDryer %}
+                        <li>{{ 'room.hairDryer.label' | trans }}</li>
+                    {% endif %}
+                    {% if room.television %}
+                        <li>{{ 'room.television.label' | trans }}</li>
+                    {% endif %}
+
                     {#{% if hostel.garage %}#}
                         {#<li>{% trans with { '%price%': hostel.garagePrice } %}garage.price{% endtrans %}</li>#}
                     {#{% else %}#}
@@ -72,7 +99,7 @@
                         {#<li>{{ 'dinner.label'|trans }}: <strong>{{ 'label.notAvailable'|trans }}</strong></li>#}
                     {#{% endif %}#}
                     {#{% if hostel.cocktails %}<li>{{ 'cocktails.label'|trans }}</li>{% endif %}#}
-                {#</ul>#}
+                </ul>
                 {#{% if hostel.guide or hostel.horseRide or hostel.scubaDiving %}#}
                     {#<h3>{% trans %}title.other.services{% endtrans %}</h3>#}
                     {#<ul>#}
@@ -86,7 +113,7 @@
 
                 {#<a class="btn btn-primary btn-lg" href="{{ path('booking', {'slug' : hostel.slug}) }}">{% trans %}button.book{% endtrans %}</a>#}
 
-            {#</div><!--/.col-sm-8-->#}
+            </div><!--/.col-sm-8-->
             {#<div class="col-sm-7">#}
                 {#<ul class="portfolio-items col-2 swipe-gallery">#}
                     {#{% for image in hostel.images %}#}
@@ -103,6 +130,6 @@
                     {#{% endfor %}#}
                 {#</ul>#}
             {#</div><!--/.col-sm-4-->#}
-        {#</div>#}
-    {#</section><!--/#contact-page-->#}
+        </div>
+    </section><!--/#contact-page-->
 {% endblock %}

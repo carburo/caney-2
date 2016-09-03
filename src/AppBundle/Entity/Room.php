@@ -371,6 +371,17 @@ class Room
         $this->voltage240 = $voltage240;
     }
 
+    public function getVoltage() {
+        $voltage = array();
+        if($this->isVoltage120()) {
+            $voltage[] = 120;
+        }
+        if($this->isVoltage240()) {
+            $voltage[] = 240;
+        }
+        return $voltage;
+    }
+
     /**
      * @return boolean
      */

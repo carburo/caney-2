@@ -55,5 +55,25 @@ wifi:
 room:
   capacity:
     label: "{1}One person|]1,Inf[ %capacity% persons"
+  privateBathroom:
+    label: Private bathroom | Shared bathroom
+  hotWater:
+    label: Hot water
+  airConditioner:
+    label: Air conditioner | Air conditioner <strong>Not available</strong>
+  voltage:
+    label: "Voltage: %voltage%"
+  privateEntrance:
+    label: Private entrance
+  safe:
+    label: Safe
+  terrace:
+    label: Terrace
+  minibar:
+    label: Minibar
+  hairDryer:
+    label: Hair dryer
+  television:
+    label: Television
 label:
   notAvailable: Not available
