@@ -95,9 +95,10 @@ vich_uploader:
   db_driver: orm
   mappings:
     hostel_images:
-      uri_prefix:         %app.path.hostel_images%
-      upload_destination: %kernel.root_dir%/../web/%app.path.hostel_images%
+      uri_prefix:         '%app.path.hostel_images%'
+      upload_destination: '%kernel.root_dir%/../web/%app.path.hostel_images%'
       directory_namer:    app.directory_namer.hostel
+      inject_on_load:     true # determines whether to inject a File instance upon load
 
 liip_imagine:
   resolvers:

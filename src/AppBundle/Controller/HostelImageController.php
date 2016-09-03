@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
  * @package AppBundle\Controller
  * @Route("/{_locale}", requirements={"_locale" = "%app.locales%"})
  */
-class HostelImageControllerController extends Controller
+class HostelImageController extends Controller
 {
     /**
      * @Route("/index")

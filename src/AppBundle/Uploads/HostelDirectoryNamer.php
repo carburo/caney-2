@@ -9,6 +9,7 @@
 namespace AppBundle\Uploads;
 
 
+use AppBundle\Entity\HostelImage;
 use Vich\UploaderBundle\Mapping\PropertyMapping;
 use Vich\UploaderBundle\Naming\DirectoryNamerInterface;
 
@@ -24,6 +25,9 @@ class HostelDirectoryNamer implements  DirectoryNamerInterface {
      */
     public function directoryName($object, PropertyMapping $mapping)
     {
-        return (string) $object->getHostel()->getId();
+        if($object instanceof HostelImage) {
+            return (string) $object->getHostel()->getId();
+        }
+        return "images";
     }
 }

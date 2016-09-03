@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -153,6 +154,11 @@ class Image
     public function setImageFile(File $image = null)
     {
         $this->imageFile = $image;
+
+        $filename = $image->getPathname();
+        $imageFile = imagecreatefromjpeg($filename);
+        $this->pixelWidth = imagesx($imageFile);
+        $this->pixelHeight = imagesy($imageFile);
 
         // VERY IMPORTANT:
         // It is required that at least one field changes if you are using Doctrine,
