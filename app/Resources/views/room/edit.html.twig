@@ -4,7 +4,8 @@
     {% trans %}title.contact{% endtrans %}
 {% endblock %}
 
-{% set hostel = form.vars.value %}
+{% set room = form.vars.value %}
+{% set hostel = room.hostel %}
 
 {% block body %}
     <section class="container-fluid">

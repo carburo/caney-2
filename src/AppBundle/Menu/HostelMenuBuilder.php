@@ -21,15 +21,18 @@ class HostelMenuBuilder implements ContainerAwareInterface
     public function mainMenu(FactoryInterface $factory, array $options) {
         $menu = $factory->createItem("root");
         $menu->setChildrenAttribute('class', 'nav nav-sidebar');
+        $hostel = $options['hostel'];
 
         $translator = $this->container->get('translator');
 
         $menu->addChild($translator->trans('general'), [
-            'route' => 'fos_user_security_login'
+            'route' => 'hostel_edit',
+            'routeParameters' => ['slug' => $hostel->getSlug()]
         ]);
 
-        $menu->addChild($translator->trans('services'), [
-            'route' => 'fos_user_security_login'
+        $menu->addChild($translator->trans('rooms'), [
+            'route' => 'hostel_rooms_edit',
+            'routeParameters' => ['slug' => $hostel->getSlug()]
         ]);
 
         $menu->addChild($translator->trans('pictures'), [

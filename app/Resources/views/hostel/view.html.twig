@@ -29,6 +29,15 @@
     <section id="contact-page" class="container">
         <div class="row">
             <div class="col-sm-5">
+                {% if is_granted('edit', hostel) %}
+                    <a href="{{ path('hostel_edit', {'slug': hostel.slug}) }}">Edit</a>
+                {% endif %}
+                <p>
+                    {{ hostel.description[:255]|nl2br }}
+                    {% if hostel.description|length > 255 %}
+                        &hellip;
+                    {% endif %}
+                </p>
                 <h3>{% trans %}title.address{% endtrans %}</h3>
                 <p>{{ hostel.address }}</p>
                 <h3>{% trans %}title.rooms{% endtrans %}</h3>

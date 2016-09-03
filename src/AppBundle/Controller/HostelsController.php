@@ -96,11 +96,29 @@ class HostelsController extends Controller
     }
 
     /**
+     * @Route("/rooms/edit/{slug}", name="hostel_rooms_edit")
+     */
+    public function editRoomsAction(Request $request, Hostel $hostel)
+    {
+        $this->denyAccessUnlessGranted('edit', $hostel);
+
+        return $this->render('hostel/edit_rooms.html.twig', [
+            'rooms' => $hostel->getRooms(),
+            'hostel' => $hostel
+        ]);
+    }
+
+    /**
      * @Route("/hostel/{slug}", name="hostel_view")
      */
     public function viewAction(Request $request, Hostel $hostel) {
+        $edit = false;
+        if($this->isGranted('edit', $hostel)) {
+            $edit = true;
+        }
         return $this->render('hostel/view.html.twig', [
-            'hostel' => $hostel
+            'hostel' => $hostel,
+            'edit' => $edit
         ]);
     }
 
