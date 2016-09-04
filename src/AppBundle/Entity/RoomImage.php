@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="room_image")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\RoomImageRepository")
  * @Vich\Uploadable
+ * @deprecated use Hostel Image instead
  */
 class RoomImage extends Image
 {

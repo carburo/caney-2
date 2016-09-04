@@ -114,22 +114,22 @@
                 {#<a class="btn btn-primary btn-lg" href="{{ path('booking', {'slug' : hostel.slug}) }}">{% trans %}button.book{% endtrans %}</a>#}
 
             </div><!--/.col-sm-8-->
-            {#<div class="col-sm-7">#}
-                {#<ul class="portfolio-items col-2 swipe-gallery">#}
-                    {#{% for image in hostel.images %}#}
-                        {#<li class="portfolio-item">#}
-                            {#<div class="item-inner">#}
-                                {#<figure data-order="{{ loop.index - 1 }}" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">#}
-                                    {#<a href="{{ vich_uploader_asset(image, 'imageFile')|imagine_filter('app_image') }}" itemprop="contentUrl" data-size="{{ image.pixelWidth }}x{{ image.pixelHeight }}">#}
-                                        {#<img src="{{ vich_uploader_asset(image, 'imageFile')|imagine_filter('app_thumb') }}" itemprop="thumbnail" alt="{{ hostel.hostelName ~ ' | ' ~ image.description }}" />#}
-                                    {#</a>#}
-                                    {#<figcaption itemprop="caption description">{{ image.description }}</figcaption>#}
-                                {#</figure>#}
-                            {#</div>#}
-                        {#</li><!--/.portfolio-item-->#}
-                    {#{% endfor %}#}
-                {#</ul>#}
-            {#</div><!--/.col-sm-4-->#}
+            <div class="col-sm-7">
+                <ul class="portfolio-items col-2 swipe-gallery">
+                    {% for image in room.images %}
+                        <li class="portfolio-item">
+                            <div class="item-inner">
+                                <figure data-order="{{ loop.index - 1 }}" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                                    <a href="{{ vich_uploader_asset(image, 'imageFile')|imagine_filter('app_image') }}" itemprop="contentUrl" data-size="{{ image.pixelWidth }}x{{ image.pixelHeight }}">
+                                        <img src="{{ vich_uploader_asset(image, 'imageFile')|imagine_filter('app_thumb') }}" itemprop="thumbnail" alt="{{ room.hostel.hostelName ~ ' | ' ~ image.description }}" />
+                                    </a>
+                                    <figcaption itemprop="caption description">{{ image.description }}</figcaption>
+                                </figure>
+                            </div>
+                        </li><!--/.portfolio-item-->
+                    {% endfor %}
+                </ul>
+            </div><!--/.col-sm-4-->
         </div>
     </section><!--/#contact-page-->
 {% endblock %}

@@ -23,6 +23,13 @@ class HostelImage extends Image
     private $hostel;
 
     /**
+     * @var Room
+     * @ORM\ManyToOne(targetEntity="Room", inversedBy="images")
+     * @ORM\JoinColumn(name="room_id", referencedColumnName="id")
+     */
+    private $room;
+
+    /**
      * @return Hostel
      */
     public function getHostel()
@@ -36,6 +43,23 @@ class HostelImage extends Image
     public function setHostel($hostel)
     {
         $this->hostel = $hostel;
+    }
+
+    /**
+     * @return Room
+     */
+    public function getRoom()
+    {
+        return $this->room;
+    }
+
+    /**
+     * @param Room $room
+     */
+    public function setRoom($room)
+    {
+        $this->room = $room;
+        $this->setHostel($room->getHostel());
     }
 
     public function __toString() {

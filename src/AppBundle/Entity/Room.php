@@ -148,7 +148,7 @@ class Room
     private $hostel;
 
     /**
-     * @ORM\OneToMany(targetEntity="RoomImage", mappedBy="room")
+     * @ORM\OneToMany(targetEntity="HostelImage", mappedBy="room")
      */
     private $images;
 
