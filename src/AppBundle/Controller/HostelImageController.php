@@ -17,14 +17,13 @@ use Symfony\Component\HttpFoundation\Request;
 class HostelImageController extends Controller
 {
     /**
-     * @Route("/hostel/{slug}/image/list")
+     * @Route("/hostel/{slug}/image/list", name="hostel_image_list")
      */
     public function indexAction(Request $request, Hostel $hostel)
     {
-        return $this->render('hostel_image/index.html.twig', array(
-            'hostel' => $hostel,
-            'images' => $hostel->getImages(),
-        ));
+        return $this->render('hostel_image/index.html.twig', [
+            'hostel' => $hostel
+        ]);
     }
 
     /**
@@ -38,11 +37,30 @@ class HostelImageController extends Controller
 
         if($form->isSubmitted() && $form->isValid()) {
             $this->saveInDatabase($image);
-            return $this->redirectToRoute('hostel_view', ['slug' => $image->getHostel()->getSlug()]);
+            return $this->redirectToRoute('hostel_image_list', [
+                'slug' => $image->getHostel()->getSlug()
+            ]);
         }
 
         return $this->render('hostel_image/edit.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/hostel/image/remove/{id}", name="hostel_image_remove")
+     */
+    public function removeAction(Request $request, HostelImage $image)
+    {
+        $this->denyAccessUnlessGranted('edit', $image->getHostel());
+        $em = $this->getDoctrine()->getManager();
+        $hostel = $image->getHostel();
+
+        $em->remove($image);
+        $em->flush();
+
+        return $this->redirectToRoute('hostel_image_list', [
+            'slug' => $hostel->getSlug()
         ]);
     }
 
@@ -61,7 +79,9 @@ class HostelImageController extends Controller
 
         if($form->isSubmitted() && $form->isValid()) {
             $this->saveInDatabase($image);
-            return $this->redirectToRoute('hostel_edit', ['slug' => $hostel->getSlug()]);
+            return $this->redirectToRoute('hostel_image_list', [
+                'slug' => $hostel->getSlug()
+            ]);
         }
 
         return $this->render('hostel_image/edit.html.twig', [
@@ -69,7 +89,8 @@ class HostelImageController extends Controller
         ]);
     }
 
-    private function saveInDatabase($entity) {
+    private function saveInDatabase($entity)
+    {
         $em = $this->getDoctrine()->getManager();
         $em->persist($entity);
         $em->flush();

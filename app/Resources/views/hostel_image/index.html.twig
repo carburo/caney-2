@@ -1,5 +1,7 @@
 {% extends "base.html.twig" %}
 
+{% set images = hostel.images %}
+
 {% block title %}
     {{ hostel.hostelName }}
 {% endblock %}
@@ -42,6 +44,9 @@
                                         <a href="{{ path('hostel_image_edit', {'id': image.id}) }}">
                                             {#{{ image.description }}#}
                                             Edit
+                                        </a>
+                                        <a href="{{ path('hostel_image_remove', {'id': image.id}) }}">
+                                            Remove
                                         </a>
                                     </figcaption>
                                     {#<a class="btn btn-default" href="{{ path('hostel_image_edit', {'id': image.id}) }}">Edit</a>    #}

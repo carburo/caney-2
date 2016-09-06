@@ -110,6 +110,8 @@ class Image
         $this->tags = new ArrayCollection();
         $this->translations = new ArrayCollection();
         $this->cacheManager = $cacheManager;
+
+        $this->setFrontPage(false);
     }
 
     public function getTranslations()
