@@ -1,0 +1,1 @@
+lessc ~/Work/hostalcabriales/workspace/hostales/web/less/main.less > ~/Work/hostalcabriales/workspace/hostales/web/css/main.css
