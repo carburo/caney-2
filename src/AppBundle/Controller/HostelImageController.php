@@ -17,12 +17,13 @@ use Symfony\Component\HttpFoundation\Request;
 class HostelImageController extends Controller
 {
     /**
-     * @Route("/index")
+     * @Route("/hostel/{slug}/image/list")
      */
-    public function indexAction()
+    public function indexAction(Request $request, Hostel $hostel)
     {
-        return $this->render('hostel_image/edit.html.twig', array(
-            // ...
+        return $this->render('hostel_image/index.html.twig', array(
+            'hostel' => $hostel,
+            'images' => $hostel->getImages(),
         ));
     }
 

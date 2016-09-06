@@ -1,0 +1,59 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ hostel.hostelName }}
+{% endblock %}
+
+{% block body %}
+    {{ include('photo-swipe.html.twig') }}
+
+    <section id="title" class="emerald">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>{{ hostel.hostelName }}</h2>
+                    {#<h3>{{ room.hostel.hostelName }}</h3>#}
+                </div>
+                <div class="col-sm-6">
+                    <ul class="breadcrumb pull-right">
+                        <li><a href="{{ path('homepage') }}">{% trans %}menu.homepage{% endtrans %}</a></li>
+                        <li><a href="{{ path('hostels') }}">{% trans %}menu.hostels{% endtrans %}</a></li>
+                        <li><a href="{{ path('hostelsByDestination', {'slug' : hostel.location.slug }) }}">{{ hostel.location.name }}</a></li>
+                        <li><a href="{{ path('hostel_view', {'slug' : hostel.slug }) }}">{{ hostel.hostelName }}</a></li>
+                        <li class="active">Images</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section><!--/#title-->
+
+    <section id="contact-page" class="container">
+        <div class="row">
+            <div class="col-sm-7">
+                <ul class="portfolio-items col-2 swipe-gallery">
+                    {% for image in images %}
+                        <li class="portfolio-item">
+                            <div class="item-inner">
+                                <figure data-order="{{ loop.index - 1 }}" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                                    <a href="{{ vich_uploader_asset(image, 'imageFile')|imagine_filter('app_image') }}" itemprop="contentUrl" data-size="{{ image.pixelWidth }}x{{ image.pixelHeight }}">
+                                        <img src="{{ vich_uploader_asset(image, 'imageFile')|imagine_filter('app_thumb') }}" itemprop="thumbnail" alt="{{ hostel.hostelName ~ ' | ' ~ image.description }}" />
+                                    </a>
+                                    <figcaption itemprop="caption description">
+                                        <a href="{{ path('hostel_image_edit', {'id': image.id}) }}">
+                                            {#{{ image.description }}#}
+                                            Edit
+                                        </a>
+                                    </figcaption>
+                                    {#<a class="btn btn-default" href="{{ path('hostel_image_edit', {'id': image.id}) }}">Edit</a>    #}
+                                </figure>
+                            </div>
+                        </li><!--/.portfolio-item-->
+                    {% endfor %}
+                </ul>
+                <a class="btn btn-primary" href="{{ path('hostel_image_new', {'slug': hostel.slug}) }}">
+                    New
+                </a>
+            </div><!--/.col-sm-4-->
+        </div>
+    </section><!--/#contact-page-->
+{% endblock %}
