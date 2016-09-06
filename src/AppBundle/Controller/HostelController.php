@@ -11,11 +11,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class HostelsController
+ * Class HostelController
  * @package AppBundle\Controller
  * @Route("/{_locale}", requirements={"_locale" = "%app.locales%"})
  */
-class HostelsController extends Controller
+class HostelController extends Controller
 {
     /**
      * @Route("/hostels/{slug}", name="hostelsByDestination")

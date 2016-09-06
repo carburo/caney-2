@@ -7,11 +7,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class ServicesController
+ * Class ServiceController
  * @package AppBundle\Controller
  * @Route("/{_locale}", requirements={"_locale" = "%app.locales%"})
  */
-class ServicesController extends Controller
+class ServiceController extends Controller
 {
     /**
      * @Route("/services", name="services")

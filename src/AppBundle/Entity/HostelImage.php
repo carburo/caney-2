@@ -30,6 +30,18 @@ class HostelImage extends Image
     private $room;
 
     /**
+     * @var PartOfTheHouse
+     * @ORM\ManyToOne(targetEntity="PartOfTheHouse")
+     * @ORM\JoinColumn(name="part_of_the_house_id", referencedColumnName="id")
+     */
+    private $partOfTheHouse;
+
+    public function __construct(CacheManager $cacheManager = null)
+    {
+        parent::__construct($cacheManager);
+    }
+
+    /**
      * @return Hostel
      */
     public function getHostel()
@@ -60,6 +72,22 @@ class HostelImage extends Image
     {
         $this->room = $room;
         $this->setHostel($room->getHostel());
+    }
+
+    /**
+     * @return PartOfTheHouse
+     */
+    public function getPartOfTheHouse()
+    {
+        return $this->partOfTheHouse;
+    }
+
+    /**
+     * @param PartOfTheHouse $partOfTheHouse
+     */
+    public function setPartOfTheHouse($partOfTheHouse)
+    {
+        $this->partOfTheHouse = $partOfTheHouse;
     }
 
     public function __toString() {

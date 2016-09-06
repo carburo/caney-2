@@ -8,13 +8,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
 
 /**
- * ImageDescription
+ * PartOfTheHouse
  *
- * @ORM\Table(name="image_description")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ImageDescriptionRepository")
- * @Gedmo\TranslationEntity(class="AppBundle\Entity\ImageDescriptionTranslation")
+ * @ORM\Table(name="part_of_the_house")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PartOfTheHouseRepository")
+ * @Gedmo\TranslationEntity(class="AppBundle\Entity\PartOfTheHouseTranslation")
  */
-class ImageDescription
+class PartOfTheHouse
 {
     /**
      * @var int
@@ -35,7 +35,7 @@ class ImageDescription
 
     /**
      * @ORM\OneToMany(
-     *   targetEntity="ImageDescriptionTranslation",
+     *   targetEntity="PartOfTheHouseTranslation",
      *   mappedBy="object",
      *   cascade={"persist", "remove"}
      * )
@@ -51,7 +51,7 @@ class ImageDescription
         return $this->translations;
     }
 
-    public function addTranslation(OtherServicesTranslation $t)
+    public function addTranslation(PartOfTheHouseTranslation $t)
     {
         if (!$this->translations->contains($t)) {
             $this->translations[] = $t;
@@ -73,7 +73,7 @@ class ImageDescription
      *
      * @param string $name
      *
-     * @return ImageDescription
+     * @return PartOfTheHouse
      */
     public function setName($name)
     {

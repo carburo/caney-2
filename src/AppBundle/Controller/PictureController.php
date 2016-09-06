@@ -7,11 +7,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class PicturesController
+ * Class PictureController
  * @package AppBundle\Controller
  * @Route("/{_locale}", requirements={"_locale" = "%app.locales%"})
  */
-class PicturesController extends Controller
+class PictureController extends Controller
 {
 
     /**

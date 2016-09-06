@@ -49,3 +49,9 @@ services:
     arguments: [~, AppBundle\Entity\HostelImage, ~]
     tags:
       - { name: sonata.admin, manager_type: orm, label: Image }
+  app.image:
+    class: AppBundle\Entity\Image
+    arguments: ['@liip_imagine.cache.manager']
+  app.hostel.image:
+      class: AppBundle\Entity\HostelImage
+      arguments: ['@liip_imagine.cache.manager']

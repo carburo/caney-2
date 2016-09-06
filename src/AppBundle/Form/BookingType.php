@@ -22,19 +22,19 @@ class BookingType extends AbstractType
         $builder
             ->add('hostel')
             ->add('user')
-            ->add('startDate', DateType::class, array(
+            ->add('startDate', DateType::class, [
                 'widget' => 'single_text'
-            ))
-            ->add('endDate', DateType::class, array(
+            ])
+            ->add('endDate', DateType::class, [
                 'widget' => 'single_text'
-            ))
+            ])
             ->add('numberOfPersons')
-            ->add('arrivalMeans', null, array(
+            ->add('arrivalMeans', null, [
                 'placeholder' => 'label.arrivalMeans'
-            ))
-            ->add('comments', TextareaType::class, array(
+            ])
+            ->add('comments', TextareaType::class, [
                 'required' => false,
-            ))
+            ])
         ;
 
         $builder->addEventListener(
@@ -44,15 +44,15 @@ class BookingType extends AbstractType
                 $booking = $event->getData();
 
                 $hostel = $booking->getHostel();
-                $rooms = null === $hostel ? array() : $hostel->getRooms();
+                $rooms = null === $hostel ? [] : $hostel->getRooms();
 
-                $form->add('rooms', EntityType::class, array(
+                $form->add('rooms', EntityType::class, [
                     'multiple' => true,
                     'class' => 'AppBundle:Room',
                     'expanded' => 'true',
                     'choices' => $rooms,
                     'translation_domain' => false,
-                ));
+                ]);
             }
         );
     }

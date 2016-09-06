@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -100,9 +101,15 @@ class Image
      */
     private $translations;
 
-    public function __construct() {
+    /**
+     * @var CacheManager
+     */
+    private $cacheManager;
+
+    public function __construct(CacheManager $cacheManager = null) {
         $this->tags = new ArrayCollection();
         $this->translations = new ArrayCollection();
+        $this->cacheManager = $cacheManager;
     }
 
     public function getTranslations()
@@ -156,15 +163,17 @@ class Image
     {
         $this->imageFile = $image;
 
-        $filename = $image->getPathname();
-        $imageFile = imagecreatefromjpeg($filename);
-        $this->pixelWidth = imagesx($imageFile);
-        $this->pixelHeight = imagesy($imageFile);
-
         // VERY IMPORTANT:
         // It is required that at least one field changes if you are using Doctrine,
         // otherwise the event listeners won't be called and the file is lost
         if ($image) {
+            $filename = $image->getPathname();
+//            $this->cacheManager->remove($filename);
+
+            $imageFile = imagecreatefromjpeg($filename);
+            $this->pixelWidth = imagesx($imageFile);
+            $this->pixelHeight = imagesy($imageFile);
+
             $this->updatedAt = new \DateTime('now');
         }
     }
@@ -182,14 +191,6 @@ class Image
         return $this->pixelWidth;
     }
 
-//    /**
-//     * @param int $pixelWidth
-//     */
-//    public function setPixelWidth($pixelWidth)
-//    {
-//        $this->pixelWidth = $pixelWidth;
-//    }
-
     /**
      * @return int
      */
@@ -197,14 +198,6 @@ class Image
     {
         return $this->pixelHeight;
     }
-
-//    /**
-//     * @param int $pixelHeight
-//     */
-//    public function setPixelHeight($pixelHeight)
-//    {
-//        $this->pixelHeight = $pixelHeight;
-//    }
 
     /**
      * Set description

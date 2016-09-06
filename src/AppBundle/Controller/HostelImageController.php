@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Hostel;
 use AppBundle\Entity\HostelImage;
 use AppBundle\Form\HostelImageType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -37,6 +38,29 @@ class HostelImageController extends Controller
         if($form->isSubmitted() && $form->isValid()) {
             $this->saveInDatabase($image);
             return $this->redirectToRoute('hostel_view', ['slug' => $image->getHostel()->getSlug()]);
+        }
+
+        return $this->render('hostel_image/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/hostel/{slug}/image/new", name="hostel_image_new")
+     */
+    public function newAction(Request $request, Hostel $hostel)
+    {
+        $image = new HostelImage();
+        $image->setHostel($hostel);
+
+        $this->denyAccessUnlessGranted('create', $hostel);
+
+        $form = $this->createForm(HostelImageType::class, $image);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $this->saveInDatabase($image);
+            return $this->redirectToRoute('hostel_edit', ['slug' => $hostel->getSlug()]);
         }
 
         return $this->render('hostel_image/edit.html.twig', [
