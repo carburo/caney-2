@@ -37,6 +37,9 @@
         "symfony/phpunit-bridge": "^3.0"
     },
     "scripts": {
+    	"pre-install-cmd": [
+    		"AppBundle\\HerokuDatabase::populateEnvironment"
+    	],
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
@@ -52,7 +55,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
-        ]
+        ],
+        "postdeploy": "php bin/console doctrine:schema:update --force"
     },
     "config": {
         "platform": {
